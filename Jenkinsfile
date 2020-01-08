@@ -11,7 +11,7 @@ agent
 }
 stages 
 {
-    stage('Source code checkout') 
+    /*stage('Source code checkout') 
     {
         steps 
         {
@@ -48,6 +48,18 @@ stages
                     nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], classifier: '', file: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip", type: 'zip']], credentialsId: 'nexus', groupId: 'portal', nexusUrl: 'ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'portal', version: '1.0'
                 }
              } 
+         }
+      }*/
+      stage('Download the artifact')
+      {
+         steps
+         {
+            script
+            {
+               set URL="http://ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081/repository/portal/portal/sales/1.0/sales-1.0.zip"
+               echo Url to be called: %URL%
+               call wget.exe --no-check-certificate  %URL%
+            }
          }
       }
    }
