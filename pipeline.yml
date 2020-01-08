@@ -1,7 +1,7 @@
 agentname: master
 artifact: 
   - sales
-  - agent
+  - common
   - members
 artifactversion: 1.0
 giturl:
