@@ -15,7 +15,7 @@ stages
     {
         steps 
         {
-            script 
+           script 
             {
                 git branch: 'develop', url: mydatas.giturl.path
                 appdata = readYaml file: "app.yml"
@@ -41,10 +41,10 @@ stages
         {
             script
             {
-                def artifact = mydatas.artifact.size()
+                def artifact = appdata.artifact.size()
                 for (int i = 0; i < artifact; i++) 
                 {
-                    zip archive: true, dir: mydatas.artifact[i], zipFile: mydatas.artifact[i]+"/"+"${currentBuild.number}/"+mydatas.artifact[i]+"_${currentBuild.number}.zip" 
+                    zip archive: true, dir: appdata.artifact[i], zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
                 }
              } 
          }
