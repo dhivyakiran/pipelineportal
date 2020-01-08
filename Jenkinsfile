@@ -45,7 +45,7 @@ stages
                 for (int i = 0; i < artifact; i++) 
                 {
                     zip archive: true, dir: appdata.artifact[i], zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
-                    nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], classifier: '', file: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip", type: 'zip']], credentialsId: '48e227ba-3bd6-490b-a989-e677115d2fd8', groupId: 'portal', nexusUrl: 'http://ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081/', nexusVersion: '3.20.1-01', repository: appdata.artifact[i]+"_${currentBuild.number}, version: '1.0'
+                    nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], classifier: '', file: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip", type: 'zip']], credentialsId: '48e227ba-3bd6-490b-a989-e677115d2fd8', groupId: 'portal', nexusUrl: 'http://ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081/', nexusVersion: '3.20.1-01', repository: appdata.artifact[i]+"_${currentBuild.number}", version: '1.0'
                 }
              } 
          }
