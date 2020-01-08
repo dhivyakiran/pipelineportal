@@ -1,9 +1,4 @@
 agentname: master
-artifact: 
-  - sales
-  - common
-  - members
-artifactversion: 1.0
 giturl:
  path: https://github.com/dhivyakiran/portal.git
 nexus:
