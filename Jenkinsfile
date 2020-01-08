@@ -17,7 +17,7 @@ stages
         {
             script 
             {
-                git url: 'https://github.com/dhivyakiran/portal.git'
+                git url: mydatas.giturl.path
                 appdata = readYaml file: "app.yml"
                 //echo "Build url:${currentBuild.absoluteUrl}"
              }
@@ -25,7 +25,7 @@ stages
      }
     stage('Download Dependencies')
     {
-        when {expression{(mydatas.pipeline != "Deploy")}}
+        when {expression{(appdata.env == "dev") || (appdata.env == "int")}}
         steps 
         {
             nodejs(nodeJSInstallationName: 'NodeJS')
@@ -36,7 +36,7 @@ stages
     }
     stage('Zip the app')
     {
-        when {expression{(mydatas.pipeline != "Deploy")}}    
+        when {expression{(appdata.env == "dev") || (appdata.env == "int")}}    
         steps 
         {
             script
