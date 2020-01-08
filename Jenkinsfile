@@ -1,6 +1,5 @@
 node 
 {
-    git url: 'https://github.com/dhivyakiran/helloworld-angular.git'
     mydatas = readYaml file: "pipeline.yml"
 }
 pipeline 
@@ -32,7 +31,7 @@ stage('Download Dependencies')
         }
    }
 }
-stage('Zip the sales app')
+stage('Zip the app')
    {
      when {expression{(mydatas.pipeline != "Deploy")}}    
     steps 
