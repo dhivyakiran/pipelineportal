@@ -57,7 +57,7 @@ stages
             script
             {
                set URL="http://ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081/repository/portal/portal/sales/1.0/sales-1.0.zip"
-               echo Url to be called: URL
+               echo "Url to be called:" URL
                call wget.exe --no-check-certificate  URL
             }
          }
