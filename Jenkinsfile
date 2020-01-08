@@ -56,8 +56,8 @@ stages
          {
             script
             {
-               sh "get -DremoteRepositories='http://ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081/portal/sales' -DgroupId=portal -Dversion=1.0 -Dpackaging=zip -Dtransitive=false"
-               sh "copy -Dartifact=portal:sales:1.0:zip -DoutputDirectory=${WORKSPACE}"
+               sh "get -DremoteRepositories='http://ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081/portal/sales' -DgroupId=portal -Dversion=1.0 -Dpackaging=zip"
+               sh "copy -Dartifact=portal:sales:1.0:sales-1.0.zip -DoutputDirectory=${WORKSPACE}"
             }
          }
       }
