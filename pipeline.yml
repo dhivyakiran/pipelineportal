@@ -1,6 +1,7 @@
 agentname: master
 giturl:
  path: https://github.com/dhivyakiran/portal.git
+ branch: develop
 nexus:
  type: zip
  credentialsId: b540a6d8-00dc-4524-af49-8d99d20d3919
