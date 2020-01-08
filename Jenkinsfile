@@ -10,13 +10,15 @@ agent
     }
     stages 
 {
-stage('Read YML file from current repository') 
+stage('Read YML file from portal repository') 
 {
 steps 
 {
 script 
 {
-     echo "Build url:${currentBuild.absoluteUrl}"
+    git url: 'https://github.com/dhivyakiran/portal.git'
+    testdatas = readYaml file: "app.yml"
+    //echo "Build url:${currentBuild.absoluteUrl}"
    }
 }
 }
