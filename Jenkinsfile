@@ -17,7 +17,7 @@ stages
         {
            script 
             {
-                git branch: 'develop', url: mydatas.giturl.path
+                git branch: mydatas.giturl.branch, url: mydatas.giturl.path
                 appdata = readYaml file: "app.yml"
                 //echo "Build url:${currentBuild.absoluteUrl}"
              }
