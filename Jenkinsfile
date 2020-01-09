@@ -11,7 +11,7 @@ agent
 }
 stages 
 {
-    /*stage('Source code checkout') 
+    stage('Source code checkout') 
     {
         steps 
         {
@@ -49,7 +49,7 @@ stages
                 }
              } 
          }
-      }*/
+      }
       stage('Download the artifact')
       {
          steps
