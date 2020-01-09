@@ -4,11 +4,13 @@ giturl:
  branch: develop
 nexus:
  type: zip
- credentialsId: b540a6d8-00dc-4524-af49-8d99d20d3919
- groupId: sp.sd
- nexusUrl: localhost:8081
- nexusVersion: 3.2
- repository: helloworld-angularapp
+ credentialsId: nexus
+ groupId: portal
+ nexusUrl: ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081
+ nexusVersion: nexus3
+ protocol: http
+ repository: portal
+ version: 1.2
 sonarqube:
  url: 
 dev_s3bucket:
