@@ -10,7 +10,7 @@ nexus:
  nexusVersion: 'nexus3'
  protocol: 'http'
  repository: 'portal'
- version: 1.2
+ version: '1.2'
 sonarqube:
  url: 
 dev_s3bucket:
