@@ -9,9 +9,10 @@ agent
 {
    label "master"
 }
-stages{steps{cleanWs()}}
+
 stages 
 {
+    stage{steps{cleanWs()}}
     stage('Source code checkout') 
     {
         steps 
