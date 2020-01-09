@@ -56,7 +56,7 @@ stages
          {
             script
             {
-               sh "wget http://ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081/repository/portal/portal/sales/1.0/sales-1.0.zip -O ${WORKSPACE}/"
+               sh "wget http://ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081/repository/portal/portal/sales/1.0/sales-1.0.zip" -O ${WORKSPACE}/
               // wget --user="jenkins" --password="jenkins" "http://ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081/repository/portal/portal/sales/1.0/sales-1.0.zip" -O ${WORKSPACE}/
            // sh "${maven}/bin/mvn dependency:get -DremoteRepositories="http://ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081/repository/portal" -DgroupId="portal" -DartifactId="sales" -Dversion=1.0 -Dtransitive=false
             //sh "${maven}/bin/mvn dependency:copy -Dartifact=portal:sales:1.0:zip -DoutputDirectory=${WORKSPACE}
