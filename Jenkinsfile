@@ -45,19 +45,24 @@ stages
                 for (int i = 0; i < artifact; i++) 
                 {
                     zip archive: true, dir: appdata.artifact[i], zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
-                    nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], classifier: '', file: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip", type: 'zip']], credentialsId: 'nexus', groupId: 'portal', nexusUrl: 'ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'portal', version: '1.1'
+                    nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], classifier: '', file: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip", type: mydatas.nexus.type]], credentialsId: mydatas.nexus.credentialsId, groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusUrl, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: mydatas.nexus.version
+               
                 }
              } 
          }
       }
-     /* stage('Download the artifact')
+     /*stage('Download the artifact')
       {
          steps
          {
             script
             {
-               sh "wget http://ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081/repository/portal/portal/sales/1.0/sales-1.0.zip -P ./salesportal/" 
-            }
+               def artifact = appdata.artifact.size()
+               for (int i = 0; i < artifact; i++) 
+               {
+                  sh "wget http://ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081/repository/portal/portal/sales/1.0/sales-1.0.zip -P ./salesportal/" 
+               }
+             }
          }
       }
       stage('UnZip the app')
