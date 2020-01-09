@@ -11,7 +11,7 @@ agent
 }
 stages 
 {
-    /*stage('Source code checkout') 
+    stage('Source code checkout') 
     {
         steps 
         {
@@ -34,7 +34,7 @@ stages
             }
         }
     }
-    stage('Zip the app')
+    /*stage('Zip the app')
     {
         when {expression{(appdata.env == "dev") || (appdata.env == "int")}}    
         steps 
