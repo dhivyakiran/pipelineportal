@@ -12,7 +12,13 @@ agent
 
 stages 
 {
-    stage{steps{cleanWs()}}
+    stage('clean workspace')
+    {
+      steps
+      {
+         cleanWs()
+      }
+    }
     stage('Source code checkout') 
     {
         steps 
