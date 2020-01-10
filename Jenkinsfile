@@ -78,7 +78,7 @@ stages
              }
          }
       }
-      stage('Unzip the app')
+      stage('UnZip the app')
       {
          steps 
          {
