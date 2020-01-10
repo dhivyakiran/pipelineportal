@@ -47,7 +47,7 @@ stages
             }
         }
     }
-   /*stage('Zip the app')
+   /*stage('zip the app')
     {
         when {expression{(pipelinetype != "deploy")}} 
         steps 
