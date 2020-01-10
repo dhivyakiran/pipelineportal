@@ -14,7 +14,6 @@ stages
 {
    stage('Source code checkout') 
     {
-       when { changeset "pipeline.yml" }
         steps 
         {
            script 
