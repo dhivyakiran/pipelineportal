@@ -32,7 +32,7 @@ stages
                 {
                   pipelinetype = "deploy"
                 }
-                //echo "Build url:${currentBuild.absoluteUrl}"
+               //echo "Build url:${currentBuild.absoluteUrl}}"
              }
          }
      }
