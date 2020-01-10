@@ -6,9 +6,8 @@ nexus:
  type: "zip"
  credentialsId: 'nexus'
  groupId: "portal"
- nexusUrl: "ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081"
+ nexusUrl: "http://ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081"
  nexusVersion: "nexus3"
- protocol: 'http'
  repository: "portal"
  version: "1.2"
 sonarqube:
