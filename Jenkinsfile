@@ -22,15 +22,15 @@ stages
                 appdata = readYaml file: "app.yml"
                 if(appdata.env=="dev" || appdata.env=="int")
                 {
-                  def pipelinetype = "build"
+                  pipelinetype = "build"
                 }
                 else if(appdata.env=="sit" || appdata.env=="qa")
                 {
-                  def pipelinetype = "build and deploy"
+                  pipelinetype = "build and deploy"
                 }
                 else
                 {
-                  def pipelinetype = "deploy"
+                  pipelinetype = "deploy"
                 }
                 //echo "Build url:${currentBuild.absoluteUrl}"
              }
