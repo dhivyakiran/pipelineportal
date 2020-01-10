@@ -20,7 +20,7 @@ stages
             {
                 git branch: mydatas.giturl.branch, url: mydatas.giturl.path
                 appdata = readYaml file: "app.yml"
-                if(appdata.env=="dev" || appdata.env=="int")
+                if(appdata.env=="devs" || appdata.env=="int")
                 {
                   pipelinetype = "build"
                 }
