@@ -12,14 +12,7 @@ agent
 
 stages 
 {
-    /*stage('clean workspace')
-    {
-      steps
-      {
-         cleanWs()
-      }
-    }*/
-    stage('Source code checkout') 
+   stage('Source code checkout') 
     {
         steps 
         {
@@ -27,13 +20,25 @@ stages
             {
                 git branch: mydatas.giturl.branch, url: mydatas.giturl.path
                 appdata = readYaml file: "app.yml"
+                if(appdata.env=="dev" || appdata.env=="int")
+                {
+                  def pipelinetype = "build"
+                }
+                elseif(appdata.env=="sit" || appdata.env=="qa")
+                {
+                  def pipelinetype = "build and deploy"
+                }
+                else
+                {
+                  def pipelinetype = "deploy"
+                }
                 //echo "Build url:${currentBuild.absoluteUrl}"
              }
          }
      }
     stage('Download Dependencies')
     {
-        when {expression{(appdata.env == "dev") || (appdata.env == "int")}}
+        when {expression{(pipelinetype != "deploy")}}
         steps 
         {
             nodejs(nodeJSInstallationName: 'NodeJS')
@@ -44,7 +49,7 @@ stages
     }
    stage('Zip the app')
     {
-        when {expression{(appdata.env == "dev") || (appdata.env == "int")}}    
+        when {expression{(pipelinetype != "deploy")}} 
         steps 
         {
             script
