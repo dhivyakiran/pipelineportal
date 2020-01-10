@@ -6,7 +6,7 @@ nexus:
  type: "zip"
  credentialsId: 'nexus'
  groupId: "portal"
- nexusUrl: "http://ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081"
+ nexusUrl: "ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081"
  nexusVersion: "nexus3"
  repository: "portal"
  version: "1.2"
