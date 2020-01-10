@@ -59,7 +59,7 @@ stages
              } 
          }
       }
-     stage('Download the artifact')
+     /*stage('Download the artifact')
       {
          steps
          {
@@ -86,6 +86,6 @@ stages
                }
             } 
           }
-       }
+       }*/
    }
 }
