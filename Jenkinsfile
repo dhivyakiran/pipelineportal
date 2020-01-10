@@ -24,7 +24,7 @@ stages
                 {
                   def pipelinetype = "build"
                 }
-                elseif(appdata.env=="sit" || appdata.env=="qa")
+                else if(appdata.env=="sit" || appdata.env=="qa")
                 {
                   def pipelinetype = "build and deploy"
                 }
