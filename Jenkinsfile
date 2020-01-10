@@ -47,7 +47,7 @@ stages
             }
         }
     }
-   stage('Zip the app')
+   /*stage('Zip the app')
     {
         when {expression{(pipelinetype != "deploy")}} 
         steps 
@@ -64,7 +64,7 @@ stages
              } 
          }
       }
-     /*stage('Download the artifact')
+     stage('Download the artifact')
       {
          steps
          {
