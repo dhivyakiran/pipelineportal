@@ -15,4 +15,4 @@ sonarqube:
 dev_s3bucket:
  salesurl:
  agenturl:
- membersurl: y
+ membersurl: 
