@@ -42,7 +42,7 @@ stages
             }
         }
     }
-    stage('Zip the app')
+   stage('Zip the app')
     {
         when {expression{(appdata.env == "dev") || (appdata.env == "int")}}    
         steps 
@@ -59,7 +59,7 @@ stages
              } 
          }
       }
-     /*stage('Download the artifact')
+     stage('Download the artifact')
       {
          steps
          {
@@ -68,7 +68,7 @@ stages
                def artifact = appdata.artifact.size()
                for (int i = 0; i < artifact; i++) 
                {
-                  sh "wget http://ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081/repository/portal/portal/sales/1.0/sales-1.0.zip -P ./salesportal/" 
+                  sh 'wget mydatas.nexus.protocol://mydatas.nexus.nexusUrl/repository/mydatas.nexus.repository/mydatas.nexus.groupId/appdata.artifact[i]/mydatas.nexus.version/appdata.artifact[i]-mydatas.nexus.version.zip -P ./appdata.artifact[i]/'
                }
              }
          }
@@ -79,9 +79,13 @@ stages
          {
             script
             {
-               unzip dir: './salesportal/', glob: '', zipFile: "sales-1.0.zip"
+               def artifact = appdata.artifact.size()
+               for (int i = 0; i < artifact; i++) 
+               {
+                  unzip dir: './'+appdata.artifact[i]+'/', glob: '', zipFile: appdata.artifact[i]+"-"+mydatas.nexus.version+".zip"
+               }
             } 
           }
-       }*/
+       }
    }
 }
