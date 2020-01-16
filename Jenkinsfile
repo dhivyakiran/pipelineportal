@@ -23,21 +23,21 @@ parameters
    }
 
  
-/*environment 
+environment 
 {
-   env=${params.env}
+   env="${params.env}"
    echo "${params.env}"
-}*/
+}
 stages 
 {
    stage('Environment Initialization') 
     {
         steps 
         {
-            echo "${params}"
+            
            script 
             {
-               def env = ${params.env}
+               
                 if(env=="dev" || env=="int")
                 {
                   pipelinetype = "build_deploy"
