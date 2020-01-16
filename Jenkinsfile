@@ -9,13 +9,19 @@ agent
 {
    label "master"
 }
-properties([
+/*properties([
   parameters([
     string(name: 'env', defaultValue: 'dev'),
     string(name: 'env', defaultValue: 'qa'),
     string(name: 'env', defaultValue: 'int')
   ])
-])
+])*/
+parameters
+   {
+      string(name: 'env', defaultValue: 'dev'),
+    string(name: 'env', defaultValue: 'qa'),
+    string(name: 'env', defaultValue: 'int')
+   }
  
 /*environment 
 {
