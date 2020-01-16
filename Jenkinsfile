@@ -9,11 +9,12 @@ agent
 {
    label "master"
 }
-options([parameters([choice(choices: ['dev', 'int', 'qa', 'uat', 'prod'], description: 'environment', name: 'env')])])
+properties([parameters([string(defaultValue: 'dev', description: '', name: 'env', trim: false)])])
              
 environment 
 {
    env="${params.env}"
+   echo "env is : ${params.env}"
 }
 stages 
 {
