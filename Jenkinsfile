@@ -83,6 +83,14 @@ stages
             }
         }
      }
+     stage("Security scan") 
+    {
+        when {expression{(pipelinetype != "deploy")}}
+        steps 
+        {
+            echo "security scan"
+        }
+    }
    /*stage('zip the app and upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
