@@ -4,6 +4,7 @@ node
    mydatas = readYaml file: "pipeline.yml"
   
 }
+def env
 pipeline 
 {
 agent
@@ -60,14 +61,14 @@ stages
      }
     stage("Source code checkout") 
     {
-       echo pipelinetype
+       
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
             script
               {
                git branch: mydatas.giturl.branch, url: mydatas.giturl.path
-               appdata = readYaml file: "$env.yml"  
+               appdata = readYaml file: $env+"yml"
               }
         }
     }
