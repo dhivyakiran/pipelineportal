@@ -2,6 +2,9 @@ node
 {
    git url: 'https://github.com/dhivyakiran/pipelineportal.git'
    mydatas = readYaml file: "pipeline.yml"
+     parameters {
+        string(name: 'env', defaultValue: 'dev', description: 'environment')
+    }
 }
 pipeline 
 {
@@ -17,9 +20,7 @@ agent
   ])
 ])
      */ 
-   parameters {
-        string(name: 'env', defaultValue: 'dev', description: 'environment')
-    }
+ 
 environment 
 {
    env=${params.env}
