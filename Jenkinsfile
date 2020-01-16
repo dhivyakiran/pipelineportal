@@ -26,7 +26,7 @@ agent
  
 environment 
 {
-   envname=$env
+   envname='$env'
 
 }
 stages 
