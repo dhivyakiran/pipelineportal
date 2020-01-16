@@ -26,7 +26,7 @@ agent
  
 environment 
 {
-   env="${params.env}"
+   envname="${params.env}"
    echo "${params.env}"
 }
 stages 
@@ -39,12 +39,12 @@ stages
            script 
             {
                //def env = "${params.env}"
-                if(env=="dev" || env=="int")
+                if(envname=="dev" || envname=="int")
                 {
                   pipelinetype = "build_deploy"
                   echo "inside dev and int"
                 }
-                else if(env=="uat" || env=="qa" || env=="prod")
+                else if(envname=="uat" || envname=="qa" || envname=="prod")
                 {
                   pipelinetype = "deploy"
                 }
@@ -68,7 +68,7 @@ stages
             script
               {
                git branch: mydatas.giturl.branch, url: mydatas.giturl.path
-               appdata = readYaml file: $env+"yml"
+               appdata = readYaml file: $envname+"yml"
               }
         }
     }
