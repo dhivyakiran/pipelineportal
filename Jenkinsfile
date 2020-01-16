@@ -18,17 +18,17 @@ agent
     string(name: 'env', defaultValue: 'int')
   ])
 ])*/
-parameters
+/*parameters
    {
       string(name: 'env', defaultValue: 'dev')
-   }
+   }*/
 
  
-/*environment 
+environment 
 {
    env="${params.env}"
    echo "${params.env}"
-}*/
+}
 stages 
 {
    stage('Environment Initialization') 
@@ -38,7 +38,7 @@ stages
             
            script 
             {
-               def env = "${params.env}"
+               //def env = "${params.env}"
                 if(env=="dev" || env=="int")
                 {
                   pipelinetype = "build_deploy"
