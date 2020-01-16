@@ -9,9 +9,9 @@ agent
 {
    label "master"
 }
-parameters {
+/*parameters {
     choice(choices: ['dev', 'int', 'qa', 'prod', 'uat'], description: 'environment', name: 'env')
-}
+}*/
 environment 
 {
    env="${params.env}"
