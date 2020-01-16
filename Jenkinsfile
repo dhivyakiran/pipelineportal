@@ -13,12 +13,13 @@ agent
   parameters([
     string(name: 'env', defaultValue: 'dev'),
     string(name: 'env', defaultValue: 'qa'),
-    string(name: 'env', defaultValue: 'int'),
+    string(name: 'env', defaultValue: 'int')
   ])
 ])*/
      
  parameters {
-    string(name: 'env', defaultValue: 'dev', description: 'environment')
+    string(name: 'env', defaultValue: 'dev', description: 'environment'),
+    string(name: 'env', defaultValue: 'int', description: 'environment'
 } 
 /*environment 
 {
@@ -33,6 +34,7 @@ stages
         {
            script 
             {
+               def env = ${params.env}
                 if(env=="dev" || env=="int")
                 {
                   pipelinetype = "build_deploy"
