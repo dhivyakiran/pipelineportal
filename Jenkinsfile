@@ -69,7 +69,7 @@ stages
             script
               {
                git branch: mydatas.giturl.branch, url: mydatas.giturl.path
-               appdata = readYaml file: $envname+"yml"
+               appdata = readYaml file: envname+".yml"
               }
         }
     }
