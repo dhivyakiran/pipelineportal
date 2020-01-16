@@ -16,7 +16,10 @@ agent
     string(name: 'env', defaultValue: 'int'),
   ])
 ])
-     */        
+     */ 
+   parameters {
+        string(name: 'env', defaultValue: 'dev', description: 'environment')
+    }
 environment 
 {
    env=${params.env}
