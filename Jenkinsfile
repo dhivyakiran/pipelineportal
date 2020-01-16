@@ -9,7 +9,7 @@ agent
 {
    label "master"
 }
-properties([parameters([string(defaultValue: 'dev', description: '', name: 'env', trim: false)])])
+options([parameters([string(defaultValue: 'dev', description: '', name: 'env', trim: false)])])
              
 environment 
 {
