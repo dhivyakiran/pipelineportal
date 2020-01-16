@@ -37,7 +37,7 @@ stages
             echo "${params}"
            script 
             {
-               //def env = ${params.env}
+               def env = ${params.env}
                 if(env=="dev" || env=="int")
                 {
                   pipelinetype = "build_deploy"
