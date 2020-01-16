@@ -26,7 +26,7 @@ agent
  
 environment 
 {
-   envname='{$params.envname}'
+   envname="${params.envname}"
 
 }
 stages 
