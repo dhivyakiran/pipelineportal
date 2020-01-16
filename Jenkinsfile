@@ -60,6 +60,7 @@ stages
      }
     stage("Source code checkout") 
     {
+       echo pipelinetype
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
