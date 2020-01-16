@@ -4,7 +4,7 @@ node
    mydatas = readYaml file: "pipeline.yml"
   
 }
-def env
+
 pipeline 
 {
 agent
