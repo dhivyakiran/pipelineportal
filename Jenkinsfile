@@ -19,8 +19,8 @@ agent
      */        
 environment 
 {
-   env="${params.env}"
-   echo "env is : ${params.env}"
+   myEnv=env
+   echo "env is :" myEnv
 }
 stages 
 {
