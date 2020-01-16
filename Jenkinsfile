@@ -63,12 +63,12 @@ stages
             echo "Execute unit tests"
         }
     }
-    stage("SonarQube code analysis") 
+    /*stage("SonarQube code analysis") 
     {
         when {expression{(pipelinetype != "deploy")}}
-          /*environment { scannerHome = tool 'SonarQubeScanner' }*/
+          //environment { scannerHome = tool 'SonarQubeScanner' }
         steps {
-           /* withSonarQubeEnv('sonarqube') { bat "${scannerHome}/bin/sonar-scanner"}*/
+           //withSonarQubeEnv('sonarqube') { bat "${scannerHome}/bin/sonar-scanner"}
           bat "sonar-scanner -X"
         }
      }
@@ -82,7 +82,7 @@ stages
                waitForQualityGate abortPipeline: true
             }
         }
-     }
+     }*/
      stage("Security scan") 
     {
         when {expression{(pipelinetype != "deploy")}}
