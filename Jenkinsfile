@@ -2,13 +2,7 @@ node
 {
    git url: 'https://github.com/dhivyakiran/pipelineportal.git'
    mydatas = readYaml file: "pipeline.yml"
-   properties([
-  parameters([
-    string(name: 'env', defaultValue: 'dev'),
-    string(name: 'env', defaultValue: 'qa'),
-    string(name: 'env', defaultValue: 'int')
-  ])
-])
+  
 }
 pipeline 
 {
@@ -23,22 +17,24 @@ agent
     string(name: 'env', defaultValue: 'int')
   ])
 ])*/
-/*parameters
+parameters
    {
       string(name: 'env', defaultValue: 'dev')
-   }*/
+   }
+
  
-environment 
+/*environment 
 {
    env=${params.env}
    echo "${params.env}"
-}
+}*/
 stages 
 {
    stage('Environment Initialization') 
     {
         steps 
         {
+            echo "${params}"
            script 
             {
                //def env = ${params.env}
