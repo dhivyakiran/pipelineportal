@@ -9,7 +9,7 @@ agent
 {
    label "master"
 }
-properties([parameters([choice(choices: ['dev', 'int', 'qa', 'uat', 'prod'], description: 'environment', name: 'env')])])
+options([parameters([choice(choices: ['dev', 'int', 'qa', 'uat', 'prod'], description: 'environment', name: 'env')])])
              
 environment 
 {
