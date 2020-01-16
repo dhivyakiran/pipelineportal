@@ -47,7 +47,7 @@ stages
             }
         }
     }
-    stage("SonarQube analysis") 
+    stage("SonarQube code analysis") 
     {
           /*environment 
           {
@@ -66,7 +66,7 @@ stages
         }
      }
      stage("SonarQube Quality Gate") 
-    {
+     {
         steps 
         {
             timeout(time: 10, unit: 'MINUTES') 
@@ -75,7 +75,7 @@ stages
             }
         }
      }
-   /*stage('zip the app')
+   /*stage('zip the app and upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
         steps 
@@ -107,7 +107,7 @@ stages
              }
          }
       }
-      stage('UnZip the app')
+      stage('UnZip the application')
       {
          when {expression{(pipelinetype != "build")}} 
          steps 
@@ -121,6 +121,21 @@ stages
                }
             } 
           }
-       }*/
+       }
+       stage("Deploy into S3 bucket") 
+       {
+        when {expression{(pipelinetype != "build")}} 
+        steps 
+        {
+           aws s3 cp $WORKSPACE/ s3://your/bucket --recursive --include "*"
+        }
+     }*/
+   }
+   post 
+   {
+      always 
+      {
+         emailext body: "${currentBuild.absoluteUrl} has result ${currentBuild.result}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: "${currentBuild.result} pipeline: ${currentBuild.fullDisplayName}"
+      }
    }
 }
