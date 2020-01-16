@@ -27,6 +27,7 @@ stages
                 if(env=="dev" || env=="int")
                 {
                   pipelinetype = "build_deploy"
+                  echo "inside dev"
                 }
                 else if(env=="uat" || env=="qa" || env=="prod")
                 {
@@ -35,8 +36,10 @@ stages
                 else
                 {
                   pipelinetype = "build"
+                   echo "inside else"
                 }
                //echo "Build url:${currentBuild.absoluteUrl}}"
+               echo "inside script"
              }
          }
      }
