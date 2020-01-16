@@ -18,8 +18,8 @@ agent
 ])*/
      
  parameters {
-    string(name: 'env', defaultValue: 'dev', description: 'environment'),
-    string(name: 'env', defaultValue: 'int', description: 'environment')
+    string(name: 'env', defaultValue: 'dev', description: 'environment')
+   // string(name: 'env', defaultValue: 'int', description: 'environment')
 } 
 /*environment 
 {
