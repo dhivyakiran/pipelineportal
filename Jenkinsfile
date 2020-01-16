@@ -27,7 +27,7 @@ agent
 environment 
 {
    envname='${params.env}'
-echo $envname
+
 }
 stages 
 {
@@ -39,6 +39,7 @@ stages
            script 
             {
                //def env = "${params.env}"
+               echo envname
                 if(envname=="dev" || envname=="int")
                 {
                   pipelinetype = "build_deploy"
