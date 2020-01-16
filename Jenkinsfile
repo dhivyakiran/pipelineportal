@@ -12,7 +12,7 @@ agent
 
 stages 
 {
-   stage('Source code checkout') 
+   stage('Environment Initialization') 
     {
         steps 
         {
@@ -22,15 +22,15 @@ stages
                 appdata = readYaml file: "app.yml"
                 if(appdata.env=="dev" || appdata.env=="int")
                 {
-                  pipelinetype = "build"
+                  pipelinetype = "build_deploy"
                 }
-                else if(appdata.env=="sit" || appdata.env=="qa")
+                else if(appdata.env=="uat" || appdata.env=="qa" || appdata.env=="prod")
                 {
-                  pipelinetype = "build and deploy"
+                  pipelinetype = "deploy"
                 }
                 else
                 {
-                  pipelinetype = "deploy"
+                  pipelinetype = "build"
                 }
                //echo "Build url:${currentBuild.absoluteUrl}}"
              }
@@ -47,6 +47,34 @@ stages
             }
         }
     }
+    stage("SonarQube analysis") 
+    {
+          /*environment 
+          {
+              scannerHome = tool 'SonarQubeScanner'
+          }*/
+        steps {
+          /* withSonarQubeEnv('sonarqube') 
+          {
+            bat "${scannerHome}/bin/sonar-scanner"
+          }
+          timeout(time: 10, unit: 'MINUTES') 
+          {
+            waitForQualityGate abortPipeline: true
+          }*/
+          bat "sonar-scanner -X"
+        }
+     }
+     stage("SonarQube Quality Gate") 
+    {
+        steps 
+        {
+            timeout(time: 10, unit: 'MINUTES') 
+            {
+               waitForQualityGate abortPipeline: true
+            }
+        }
+     }
    /*stage('zip the app')
     {
         when {expression{(pipelinetype != "deploy")}} 
@@ -66,6 +94,7 @@ stages
       }
      stage('Download the artifact')
       {
+         when {expression{(pipelinetype != "build")}} 
          steps
          {
             script
@@ -80,6 +109,7 @@ stages
       }
       stage('UnZip the app')
       {
+         when {expression{(pipelinetype != "build")}} 
          steps 
          {
             script
