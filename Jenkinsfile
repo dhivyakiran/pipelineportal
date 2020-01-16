@@ -47,26 +47,34 @@ stages
             }
         }
     }
+    stage("TS Linting") 
+    {
+        when {expression{(pipelinetype != "deploy")}}
+        steps 
+        {
+            echo "Linting"
+        }
+    }
+    stage("Unit Testcase") 
+    {
+        when {expression{(pipelinetype != "deploy")}}
+        steps 
+        {
+            echo "Execute unit tests"
+        }
+    }
     stage("SonarQube code analysis") 
     {
-          /*environment 
-          {
-              scannerHome = tool 'SonarQubeScanner'
-          }*/
+        when {expression{(pipelinetype != "deploy")}}
+          /*environment { scannerHome = tool 'SonarQubeScanner' }*/
         steps {
-          /* withSonarQubeEnv('sonarqube') 
-          {
-            bat "${scannerHome}/bin/sonar-scanner"
-          }
-          timeout(time: 10, unit: 'MINUTES') 
-          {
-            waitForQualityGate abortPipeline: true
-          }*/
+           /* withSonarQubeEnv('sonarqube') { bat "${scannerHome}/bin/sonar-scanner"}*/
           bat "sonar-scanner -X"
         }
      }
      stage("SonarQube Quality Gate") 
      {
+        when {expression{(pipelinetype != "deploy")}}
         steps 
         {
             timeout(time: 10, unit: 'MINUTES') 
