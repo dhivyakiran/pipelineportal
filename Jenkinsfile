@@ -15,12 +15,12 @@ agent
     string(name: 'env', defaultValue: 'qa'),
     string(name: 'env', defaultValue: 'int'),
   ])
-])
+])*/
      
  parameters {
     string(name: 'env', defaultValue: 'dev', description: 'environment')
 } 
-environment 
+/*environment 
 {
    env=${params.env}
    echo "${params.env}"
@@ -29,11 +29,6 @@ stages
 {
    stage('Environment Initialization') 
     {
-       input {
-                parameters {
-                    string(name: 'env', defaultValue: 'dev', description: 'environment')
-                }
-            }
         steps 
         {
            script 
@@ -54,6 +49,7 @@ stages
                 }
                //echo "Build url:${currentBuild.absoluteUrl}}"
                echo "inside script"
+               echo "${params.env}"
              }
          }
      }
