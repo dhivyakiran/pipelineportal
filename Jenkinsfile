@@ -9,7 +9,13 @@ agent
 {
    label "master"
 }
-
+parameters {
+    choice(choices: ['dev', 'int', 'qa', 'prod', 'uat'], description: 'environment', name: 'env')
+}
+environment 
+{
+   env="${params.env}"
+}
 stages 
 {
    stage('Environment Initialization') 
@@ -18,13 +24,11 @@ stages
         {
            script 
             {
-                git branch: mydatas.giturl.branch, url: mydatas.giturl.path
-                appdata = readYaml file: "app.yml"
-                if(appdata.env=="dev" || appdata.env=="int")
+                if(env=="dev" || env=="int")
                 {
                   pipelinetype = "build_deploy"
                 }
-                else if(appdata.env=="uat" || appdata.env=="qa" || appdata.env=="prod")
+                else if(env=="uat" || env=="qa" || env=="prod")
                 {
                   pipelinetype = "deploy"
                 }
@@ -36,6 +40,18 @@ stages
              }
          }
      }
+    stage("Source code checkout") 
+    {
+        when {expression{(pipelinetype != "deploy")}}
+        steps 
+        {
+            script
+              {
+               git branch: mydatas.giturl.branch, url: mydatas.giturl.path
+               appdata = readYaml file: "$env.yml"  
+              }
+        }
+    }
     stage('Download Dependencies')
     {
         when {expression{(pipelinetype != "deploy")}}
