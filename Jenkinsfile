@@ -26,8 +26,8 @@ agent
  
 environment 
 {
-   envname="${params.env}"
-   echo "${params.env}"
+   envname='${params.env}'
+echo $envname
 }
 stages 
 {
