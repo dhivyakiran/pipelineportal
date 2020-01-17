@@ -11,19 +11,6 @@ agent
 {
    label "master"
 }
-/*properties([
-  parameters([
-    string(name: 'env', defaultValue: 'dev'),
-    string(name: 'env', defaultValue: 'qa'),
-    string(name: 'env', defaultValue: 'int')
-  ])
-])*/
-/*parameters
-   {
-      string(name: 'env', defaultValue: 'dev')
-   }*/
-
- 
 environment 
 {
    envname="${params.envname}"
@@ -38,12 +25,9 @@ stages
             
            script 
             {
-               //def env = "${params.env}"
-               echo envname
                 if(envname=="dev" || envname=="int")
                 {
                   pipelinetype = "build_deploy"
-                  echo "inside dev and int"
                 }
                 else if(envname=="uat" || envname=="qa" || envname=="prod")
                 {
@@ -52,11 +36,8 @@ stages
                 else
                 {
                   pipelinetype = "build"
-                   echo "inside else"
                 }
                //echo "Build url:${currentBuild.absoluteUrl}}"
-               echo "inside script"
-               
              }
          }
      }
@@ -100,7 +81,15 @@ stages
             echo "Execute unit tests"
         }
     }
-    /*stage("SonarQube code analysis") 
+    /*stage("Sonar Code Coverage") 
+    {
+        when {expression{(pipelinetype != "deploy")}}
+        steps 
+        {
+            echo "code coverage"
+        }
+    }
+    stage("SonarQube code analysis") 
     {
         when {expression{(pipelinetype != "deploy")}}
           //environment { scannerHome = tool 'SonarQubeScanner' }
@@ -188,7 +177,7 @@ stages
    {
       always 
       {
-         emailext body: "${currentBuild.absoluteUrl} has result ${currentBuild.result}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: "${currentBuild.result} pipeline: ${currentBuild.fullDisplayName}"
+         emailext attachLog: true, body: "${currentBuild.result}: ${currentBuild.absoluteUrl}", compressLog: true, replyTo: 'email@xxx.com', subject: "${currentBuild.result} pipeline: ${currentBuild.fullDisplayName}", to: 'email123@xxx.com'
       }
    }
 }
