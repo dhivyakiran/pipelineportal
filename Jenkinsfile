@@ -177,7 +177,7 @@ stages
    {
       always 
       {
-         emailext attachLog: true, body: "${currentBuild.result}: ${currentBuild.absoluteUrl}", compressLog: true, replyTo: 'email@xxx.com', subject: "${currentBuild.result} pipeline: ${currentBuild.fullDisplayName}", to: 'email123@xxx.com'
+         emailext attachLog: true, body: "${currentBuild.result}: ${currentBuild.absoluteUrl}", compressLog: true, replyTo: 'dhivya.krish15@gmail.com', subject: "${currentBuild.result} pipeline: ${currentBuild.fullDisplayName}", to: 'dhivyakrish1491@gmail.com'
       }
    }
 }
