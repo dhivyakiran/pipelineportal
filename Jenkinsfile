@@ -70,7 +70,10 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-            echo "Linting"
+            nodejs(nodeJSInstallationName: 'NodeJS')
+            {
+            sh 'npm run affected:lint'
+            }
         }
     }
     stage("Unit Testcase") 
@@ -78,7 +81,10 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-            echo "Execute unit tests"
+            nodejs(nodeJSInstallationName: 'NodeJS')
+            {
+            sh 'npm run affected:test'
+            }
         }
     }
     /*stage("Sonar Code Coverage") 
@@ -86,7 +92,10 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-            echo "code coverage"
+            nodejs(nodeJSInstallationName: 'NodeJS')
+            {
+            sh 'npm run code-coverage'
+            }
         }
     }
     stage("SonarQube code analysis") 
