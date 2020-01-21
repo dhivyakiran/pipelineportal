@@ -77,7 +77,7 @@ stages
 				
 				if(appdata.artifact[i] == "sales") 
 				{
-				sh "mkdir salesportal"
+				//sh "mkdir salesportal"
 				sh "cp -r aflac salesportal"
 				sh "rm -ri ./aflac/apps/agent"
 				sh "rm -ri ./aflac/apps/member"
