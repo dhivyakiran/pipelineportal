@@ -50,7 +50,7 @@ stages
               {
                git branch: mydatas.giturl.branch, url: mydatas.giturl.path
                appdata = readYaml file: envname+".yml"
-			   sh "cp -r /home/satya/portal/portals ."
+			   sh "cp -R /home/satya/portal/portals/aflac ."
               }
         }
     }
