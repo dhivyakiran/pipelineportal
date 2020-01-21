@@ -78,8 +78,8 @@ stages
 				if(appdata.artifact[i] != "sales") 
 				{
 				//sh "mkdir salesportal"
-				sh "cp -r aflac ${appdata.artifact[i]}"
-				sh "rm -rf ${appdata.artifact[i]}/aflac/apps/sales*"
+				//sh "cp -r aflac ${appdata.artifact[i]}"
+				sh "rm -rf aflac/apps/sales*"
 				}
 
                     zip archive: true, dir: "aflac", zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
