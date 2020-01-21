@@ -125,11 +125,12 @@ stages
                 for (int i = 0; i < artifact; i++) 
                 {
                mkdir appdata.artifact[i]
-		cp -r aflac appdata.artifact[i]
-	if(appdata.artifact[i] == "sales"){
+		cp -r ./aflac appdata.artifact[i]
+	if(appdata.artifact[i] == "sales")
+{
 		rm -ri ./aflac/apps/member*
 	rm -ri ./aflac/apps/agent*
-					 }
+		}
                    elseif(appdata.artifact[i] == "agent")
                    {
                       rm -ri ./aflac/apps/member*
