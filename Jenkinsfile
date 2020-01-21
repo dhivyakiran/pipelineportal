@@ -79,8 +79,8 @@ stages
 				{
 				//sh "mkdir salesportal"
 				sh "cp -r aflac salesportal"
-				sh "rm -ri ./aflac/apps/agent"
-				sh "rm -ri ./aflac/apps/member"
+				sh "rm -rf salesportal/aflac/apps/agent/.*"
+				sh "rm -rf salesportal/aflac/apps/member/.*"
 				}
 
                     zip archive: true, dir: "salesportal", zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
