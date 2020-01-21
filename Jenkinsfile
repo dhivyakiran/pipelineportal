@@ -62,7 +62,58 @@ stages
             sh 'npm install'
         }
     }
-
+    stage("TS Linting") 
+    {
+        when {expression{(pipelinetype != "deploy")}}
+        steps 
+        {
+           sh 'npm run affected:lint'
+        }
+    }
+    stage("Unit Testcase") 
+    {
+        when {expression{(pipelinetype != "deploy")}}
+        steps 
+        {
+            sh 'npm run affected:test'
+        }
+    }
+    stage("Sonar Code Coverage") 
+    {
+        when {expression{(pipelinetype != "deploy")}}
+        steps 
+        {
+            sh 'npm run code-coverage'
+        }
+    }
+    stage("SonarQube code analysis") 
+    {
+        when {expression{(pipelinetype != "deploy")}}
+          //environment { scannerHome = tool 'SonarQubeScanner' }
+        steps {
+           //withSonarQubeEnv('sonarqube') { bat "${scannerHome}/bin/sonar-scanner"}
+          sh "sonar-scanner -X"
+        }
+     }
+     stage("SonarQube Quality Gate") 
+     {
+        when {expression{(pipelinetype != "deploy")}}
+        steps 
+        {
+            timeout(time: 10, unit: 'MINUTES') 
+            {
+               waitForQualityGate abortPipeline: true
+            }
+        }
+     }
+     stage("Security scan") 
+    {
+        when {expression{(pipelinetype != "deploy")}}
+        steps 
+        {
+            echo "security scan"
+        }
+    }
    stage('zip the app and upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
