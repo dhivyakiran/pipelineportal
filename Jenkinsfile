@@ -77,7 +77,7 @@ stages
 				if(appdata.artifact[i] != "sales")
 				{
 					
-					rmdir sales
+					rm -rf ./sales
 				}
 
                     zip archive: true, dir: appdata.artifact[i], zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
