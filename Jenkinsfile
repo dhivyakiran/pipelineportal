@@ -74,7 +74,7 @@ stages
                 {
                 mkdir appdata.artifact[i]
 				cp -Rp ./ appdata.artifact[i]
-				if(appdata.artifact[i] != "sales")
+				if((appdata.artifact[i])!="sales")
 				{
 					
 					rm -rf ./sales
