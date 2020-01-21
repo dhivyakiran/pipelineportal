@@ -4,7 +4,7 @@ giturl:
  branch: development
 nexus:
  type: "zip"
- credentialsId: 'jenkins'
+ credentialsId: 'nexus'
  groupId: "portal"
  nexusUrl: "10.250.1.155:8081"
  nexusVersion: "nexus3"
