@@ -6,10 +6,10 @@ nexus:
  type: "zip"
  credentialsId: 'nexus'
  groupId: "portal"
- nexusUrl: "ec2-3-15-13-91.us-east-2.compute.amazonaws.com:8081"
+ nexusUrl: "10.250.1.155:8081"
  nexusVersion: "nexus3"
  repository: "portal"
- version: "1.1"
+ version: "1.2"
 sonarqube:
  url: 
 dev_s3bucket:
