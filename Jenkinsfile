@@ -74,11 +74,7 @@ stages
                 {
                 mkdir appdata.artifact[i]
 				cp -Rp ./ appdata.artifact[i]
-				if((appdata.artifact[i])!="sales")
-				{
-					
-					rm -rf ./sales
-				}
+				if((appdata.artifact[i])!="sales") { rm -rf ./sales }
 
                     zip archive: true, dir: appdata.artifact[i], zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
                     
