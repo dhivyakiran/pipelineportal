@@ -62,7 +62,7 @@ stages
             sh 'npm install'
         }
     }
-    stage("TS Linting") 
+   /* stage("TS Linting") 
     {
         when {expression{(pipelinetype != "deploy")}}
         steps 
@@ -85,7 +85,7 @@ stages
         {
             sh 'npm run code-coverage'
         }
-    }
+    }*/
     stage("SonarQube code analysis") 
     {
         when {expression{(pipelinetype != "deploy")}}
