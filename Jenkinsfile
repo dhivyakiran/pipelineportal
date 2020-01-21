@@ -76,7 +76,8 @@ stages
 				cp -Rp ./ appdata.artifact[i]
 				if(appdata.artifact[i] != "sales")
 				{
-					bat rmdir "./sales*"
+					
+					rmdir sales
 				}
 
                     zip archive: true, dir: appdata.artifact[i], zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
