@@ -75,16 +75,16 @@ stages
                 {
                 
 				
-				if(appdata.artifact[i] == "sales") 
+				if(appdata.artifact[i] != "sales") 
 				{
 				//sh "mkdir salesportal"
-				sh "cp -r aflac salesportal"
-				sh "rm -rf salesportal/aflac/apps/agent*"
-				sh "rm -rf salesportal/aflac/apps/member*"
+				sh "cp -r aflac ${appdata.artifact[i]}"
+				sh "rm -rf ${appdata.artifact[i]}/aflac/apps/agent*"
+				sh "rm -rf ${appdata.artifact[i]}/aflac/apps/member*"
 				}
 
-                    zip archive: true, dir: "salesportal", zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
-                  nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], classifier: '', file: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip", type:'zip']], credentialsId: mydatas.nexus.credentialsId, groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusUrl, protocol: 'http', repository: mydatas.nexus.repository, version: mydatas.nexus.version          
+                    zip archive: true, dir: appdata.artifact[i], zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
+                  //nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], classifier: '', file: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip", type:'zip']], credentialsId: mydatas.nexus.credentialsId, groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusUrl, protocol: 'http', repository: mydatas.nexus.repository, version: mydatas.nexus.version          
                
 		}
              } 
