@@ -59,10 +59,9 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-            nodejs(nodeJSInstallationName: 'NodeJS')
-            {
+            
             sh 'npm install'
-            }
+            
         }
     }
     /*stage("TS Linting") 
