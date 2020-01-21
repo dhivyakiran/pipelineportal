@@ -73,10 +73,10 @@ stages
                 for (int i = 0; i < artifact; i++) 
                 {
                 mkdir appdata.artifact[i]
-				cp -Rp aflac appdata.artifact[i]
+				cp -Rp ./ appdata.artifact[i]
 				if(appdata.artifact[i] != "sales")
 				{
-					bat rmdir \"aflac/apps/sales\" /S /Q
+					bat rmdir \"/sales\" /S /Q
 				}
 
                     zip archive: true, dir: appdata.artifact[i], zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
