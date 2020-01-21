@@ -75,7 +75,7 @@ stages
                 mkdir appdata.artifact[i]
 				cp -Rp ./ appdata.artifact[i]
 				if((appdata.artifact[i])!="sales") { 
-				bat rmdir $WORKSPACE+"/sales" /S /Q
+				sh "rm -ri ./sales"
 				}
 
                     zip archive: true, dir: appdata.artifact[i], zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
