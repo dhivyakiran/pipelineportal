@@ -83,7 +83,7 @@ stages
 				sh "rm -ri ./aflac/apps/member"
 				}
 
-                    zip archive: true, dir: appdata.artifact[i], zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
+                    zip archive: true, dir: "salesportal", zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
                             
                 }
              } 
