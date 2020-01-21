@@ -9,7 +9,7 @@ pipeline
 {
 agent
 {
-   label "slave1"
+   label "master"
 }
 environment 
 {
@@ -125,22 +125,12 @@ stages
                 for (int i = 0; i < artifact; i++) 
                 {
                mkdir appdata.artifact[i]
-		cp -r ./aflac appdata.artifact[i]
-	if(appdata.artifact[i] == "sales")
-{
-		rm -ri ./aflac/apps/member*
-	rm -ri ./aflac/apps/agent*
-		}
-                   elseif(appdata.artifact[i] == "agent")
-                   {
-                      rm -ri ./aflac/apps/member*
-					       rm -ri ./aflac/apps/sales*
-                   }
-                      else
-                      {
-                        rm -ri ./aflac/apps/agent*
-                        rm -ri ./aflac/apps/sales*  
-                      }
+	       cp -Rp aflac appdata.artifact[i]
+		if(appdata.artifact[i] != "sales")
+			{
+			bat rmdir \"aflac/apps/sales\" /S /Q
+			}
+
                     zip archive: true, dir: appdata.artifact[i], zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
                     //nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], classifier: '', file: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip", type:'zip']], credentialsId: mydatas.nexus.credentialsId, groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusUrl, protocol: 'http', repository: mydatas.nexus.repository, version: mydatas.nexus.version
                
