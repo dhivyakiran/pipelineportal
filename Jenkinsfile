@@ -9,7 +9,7 @@ pipeline
 {
 agent
 {
-   label "slave1"
+   label "master"
 }
 environment 
 {
@@ -65,7 +65,7 @@ stages
             }
         }
     }
-    stage("TS Linting") 
+    /*stage("TS Linting") 
     {
         when {expression{(pipelinetype != "deploy")}}
         steps 
@@ -87,7 +87,7 @@ stages
             }
         }
     }
-    /*stage("Sonar Code Coverage") 
+    stage("Sonar Code Coverage") 
     {
         when {expression{(pipelinetype != "deploy")}}
         steps 
@@ -117,7 +117,7 @@ stages
                waitForQualityGate abortPipeline: true
             }
         }
-     }*/
+     }
      stage("Security scan") 
     {
         when {expression{(pipelinetype != "deploy")}}
@@ -125,8 +125,8 @@ stages
         {
             echo "security scan"
         }
-    }
-   /*stage('zip the app and upload the artifact')
+    }*/
+   stage('zip the app and upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
         steps 
@@ -173,7 +173,7 @@ stages
             } 
           }
        }
-       stage("Deploy into S3 bucket") 
+       /*stage("Deploy into S3 bucket") 
        {
         when {expression{(pipelinetype != "build")}} 
         steps 
