@@ -59,9 +59,7 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-            
             sh 'npm install'
-            
         }
     }
     /*stage("TS Linting") 
@@ -69,10 +67,7 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-            nodejs(nodeJSInstallationName: 'NodeJS')
-            {
-            sh 'npm run affected:lint'
-            }
+           sh 'npm run affected:lint'
         }
     }
     stage("Unit Testcase") 
@@ -80,10 +75,7 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-            nodejs(nodeJSInstallationName: 'NodeJS')
-            {
             sh 'npm run affected:test'
-            }
         }
     }
     stage("Sonar Code Coverage") 
@@ -91,10 +83,7 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-            nodejs(nodeJSInstallationName: 'NodeJS')
-            {
             sh 'npm run code-coverage'
-            }
         }
     }
     stage("SonarQube code analysis") 
@@ -135,14 +124,30 @@ stages
                 def artifact = appdata.artifact.size()
                 for (int i = 0; i < artifact; i++) 
                 {
+               mkdir appdata.artifact[i]
+					cp -r aflac appdata.artifact[i]
+					if(appdata.artifact[i] == "sales"){
+					 rm -ri ./aflac/apps/member*
+					 rm -ri ./aflac/apps/agent*
+					 }
+                   elseif(appdata.artifact[i] == "agent"){
+                   {
+                      rm -ri ./aflac/apps/member*
+					       rm -ri ./aflac/apps/sales*
+                   }
+                      else
+                      {
+                        rm -ri ./aflac/apps/agent*
+                        rm -ri ./aflac/apps/sales*  
+                      }
                     zip archive: true, dir: appdata.artifact[i], zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
-                    nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], classifier: '', file: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip", type:'zip']], credentialsId: mydatas.nexus.credentialsId, groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusUrl, protocol: 'http', repository: mydatas.nexus.repository, version: mydatas.nexus.version
+                    //nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], classifier: '', file: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip", type:'zip']], credentialsId: mydatas.nexus.credentialsId, groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusUrl, protocol: 'http', repository: mydatas.nexus.repository, version: mydatas.nexus.version
                
                 }
              } 
          }
       }
-     stage('Download the artifact')
+    /* stage('Download the artifact')
       {
          when {expression{(pipelinetype != "build")}} 
          steps
@@ -181,11 +186,11 @@ stages
         }
      }*/
    }
-   post 
+  /* post 
    {
       always 
       {
          emailext attachLog: true, body: "${currentBuild.result}: ${currentBuild.absoluteUrl}", compressLog: true, replyTo: 'dhivya.krish15@gmail.com', subject: "${currentBuild.result} pipeline: ${currentBuild.fullDisplayName}", to: 'dhivyakrish1491@gmail.com'
       }
    }
-}
+}*/
