@@ -50,6 +50,7 @@ stages
               {
                git branch: mydatas.giturl.branch, url: mydatas.giturl.path
                appdata = readYaml file: envname+".yml"
+	cp -r /home/satya/portal/portals .
               }
         }
     }
@@ -72,10 +73,13 @@ stages
                 def artifact = appdata.artifact.size()
                 for (int i = 0; i < artifact; i++) 
                 {
-                mkdir appdata.artifact[i]
-				cp -Rp ./ appdata.artifact[i]
-				if((appdata.artifact[i])!="sales") { 
-				sh "rm -ri ./sales"
+                
+				
+				if((appdata.artifact[i])=="sales") { 
+				sh "mkdir salesportal"
+				sh "cp -r aflac salesportal"
+				sh "rm -ri ./aflac/apps/agent"
+				sh "rm -ri ./aflac/apps/member"
 				}
 
                     zip archive: true, dir: appdata.artifact[i], zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
