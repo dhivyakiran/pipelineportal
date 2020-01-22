@@ -80,7 +80,7 @@ stages
         {
             sh 'npm run code-coverage'
         }
-    }*/
+    }
     stage("SonarQube code analysis") 
     {
         when {expression{(pipelinetype != "deploy")}}
