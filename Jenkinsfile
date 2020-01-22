@@ -113,7 +113,7 @@ stages
         {
             echo "security scan"
         }
-    }
+    }*/
    stage('zip the app and upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
@@ -149,10 +149,10 @@ stages
 	       }
              }
          }
-      }*/
-      stage('UnZip the application')
+      }
+      stage('Unzip the application')
       {
-         //when {expression{(pipelinetype != "deploy")}} 
+         when {expression{(pipelinetype != "deploy")}} 
          steps 
          {
             script
@@ -162,7 +162,7 @@ stages
                def artifact = appdata.artifact.size()
                for (int i = 0; i < artifact; i++) 
                {
-		       unzip dir: "./${appdata.artifact[i]}/portalfiles/", glob: '', zipFile: "./${appdata.artifact[i]}/portal/${appdata.artifact[i]}-${mydatas.nexus.version}.zip"
+		  unzip dir: "./${appdata.artifact[i]}/portalfiles/", glob: '', zipFile: "./${appdata.artifact[i]}/portal/${appdata.artifact[i]}-${mydatas.nexus.version}.zip"
                }
             } 
           }
