@@ -9,7 +9,7 @@ nexus:
  nexusUrl: 10.250.1.155:8081
  nexusVersion: nexus3
  repository: portal
- version: 1.0
+ version: '1.0'
 sonarqube:
  url: 
 dev_s3bucket:
