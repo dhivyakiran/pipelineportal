@@ -157,8 +157,8 @@ stages
          {
             script
             {
-		sh "mkdir members/portalfiles" 
-		sh "mkdir agent/portalfiles" 
+		//sh "mkdir members/portalfiles" 
+		//sh "mkdir agent/portalfiles" 
                def artifact = appdata.artifact.size()
                for (int i = 0; i < artifact; i++) 
                {
