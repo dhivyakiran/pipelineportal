@@ -139,10 +139,11 @@ stages
          {
             script
             {
-	       sh "mkdir ${appdata.artifact[i]}/portal"
+	       
                def artifact = appdata.artifact.size()
                for (int i = 0; i < artifact; i++) 
                {
+		 sh "mkdir ${appdata.artifact[i]}/portal"      
                 sh "wget http://${mydatas.nexus.nexusUrl}/repository/${mydatas.nexus.repository}/${mydatas.nexus.groupId}/${appdata.artifact[i]}/${mydatas.nexus.version}/${appdata.artifact[i]}-${mydatas.nexus.version}.zip -P ./${appdata.artifact[i]}/portal/"
 	       }
              }
@@ -155,10 +156,11 @@ stages
          {
             script
             {
-	       sh "mkdir ${appdata.artifact[i]}/portalfiles" 
+	      
                def artifact = appdata.artifact.size()
                for (int i = 0; i < artifact; i++) 
                {
+		   sh "mkdir ${appdata.artifact[i]}/portalfiles"      
 		  unzip dir: "./${appdata.artifact[i]}/portalfiles/", glob: '', zipFile: "./${appdata.artifact[i]}/portal/${appdata.artifact[i]}-${mydatas.nexus.version}.zip"
                }
             } 
