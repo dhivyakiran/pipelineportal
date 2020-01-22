@@ -5,7 +5,7 @@ giturl:
 nexus:
  type: zip
  groupId: portal
- nexusUrl: 10.250.1.155:8081
+ nexusUrl: 10.250.1.153:8081
  nexusVersion: nexus3
  protocol: http
  repository: portal
