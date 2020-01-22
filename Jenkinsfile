@@ -147,7 +147,7 @@ stages
                {
            // sh "wget ${mydatas.nexus.protocol}"+"://"+${mydatas.nexus.nexusUrl}+"/repository/"+${mydatas.nexus.repository}+"/"+${mydatas.nexus.groupId}+"/"+${appdata.artifact[i]}+"/"+${mydatas.nexus.version}+"/"+${appdata.artifact[i]}+"-"+${mydatas.nexus.version.zip}+" -P ./"+${appdata.artifact[i]}+"/"
              // sh "wget ${mydatas.nexus.protocol}"+"://"+${mydatas.nexus.nexusUrl}+"/repository/"+${mydatas.nexus.repository}+"/"+${mydatas.nexus.groupId}+"/"+${appdata.artifact[i]}+"/"+${mydatas.nexus.version}+"/"+${appdata.artifact[i]}+"-"+${mydatas.nexus.version}+".zip -P ./"+${appdata.artifact[i]}+"/"
-	     sh "wget http://10.250.1.155:8081/repository/portal/portal/agent/1.0/agent-1.0.zip -P ./agent/portal/"
+	     sh "wget http://${mydatas.nexus.nexusUrl}/repository/${mydatas.nexus.repository}/${mydatas.nexus.groupId}/${appdata.artifact[i]}/${mydatas.nexus.version}/${appdata.artifact[i]}-${mydatas.nexus.version}.zip -P ./${appdata.artifact[i]}/portal/"
 	       }
              }
          }
