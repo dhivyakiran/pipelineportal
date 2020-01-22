@@ -85,13 +85,13 @@ stages
         {
             sh 'npm run code-coverage'
         }
-    }
+    }*/
     stage("SonarQube code analysis") 
     {
         when {expression{(pipelinetype != "deploy")}}
-          environment { scannerHome = tool 'SonarQubeScanner' }
+          //environment { scannerHome = tool 'SonarQubeScanner' }
         steps {
-           withSonarQubeEnv('sonarqube') { bat "${scannerHome}/bin/sonar-scanner"}
+           //withSonarQubeEnv('sonarqube') { bat "${scannerHome}/bin/sonar-scanner"}
           sh "sonar-scanner -X"
         }
      }
@@ -113,7 +113,7 @@ stages
         {
             echo "security scan"
         }
-    }*/
+    }
    stage('zip the app and upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
