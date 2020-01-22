@@ -3,13 +3,13 @@ giturl:
  path: https://github.com/dhivyakiran/portal.git
  branch: development
 nexus:
- type: 'zip'
- credentialsId: 'nexus'
- groupId: 'portal'
- nexusUrl: '10.250.1.155:8081'
- nexusVersion: 'nexus3'
- repository: 'portal'
- version: '1.3'
+ type: zip
+ credentialsId: nexus
+ groupId: portal
+ nexusUrl: 10.250.1.155:8081
+ nexusVersion: nexus3
+ repository: portal
+ version: 1.3
 sonarqube:
  url: 
 dev_s3bucket:
