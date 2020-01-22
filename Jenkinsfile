@@ -50,7 +50,7 @@ stages
               {
                git branch: mydatas.giturl.branch, url: mydatas.giturl.path
                appdata = readYaml file: envname+".yml"
-			   sh "cp -R /home/satya/portal/portals/aflac ."
+			   sh "cp -R /home/satya/portal/portals ."
               }
         }
     }
@@ -129,8 +129,8 @@ stages
 				if(appdata.artifact[i] != "sales") 
 				{
 				//sh "mkdir salesportal"
-				sh "cp -r aflac ${appdata.artifact[i]}"
-				sh "rm -rf aflac/apps/sales*"
+				sh "cp -r . ${appdata.artifact[i]}"
+				sh "rm -rf apps/sales*"
 				}
 
                     zip archive: true, dir: "aflac", zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
