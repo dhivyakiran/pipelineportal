@@ -85,7 +85,7 @@ stages
         {
             sh 'npm run code-coverage'
         }
-    }*/
+    }
     stage("SonarQube code analysis") 
     {
         when {expression{(pipelinetype != "deploy")}}
@@ -113,7 +113,7 @@ stages
         {
             echo "security scan"
         }
-    }
+    }*/
    stage('zip the app and upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
