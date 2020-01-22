@@ -157,10 +157,12 @@ stages
          {
             script
             {
+		sh "mkdir members/portalfiles" 
+		sh "mkdir agent/portalfiles" 
                def artifact = appdata.artifact.size()
                for (int i = 0; i < artifact; i++) 
                {
-                  unzip dir: './'+appdata.artifact[i]+'/', glob: '', zipFile: appdata.artifact[i]+"-"+mydatas.nexus.version+".zip"
+		       unzip dir: "./${appdata.artifact[i]}/portalfiles/", glob: '', zipFile: "${appdata.artifact[i]}-${mydatas.nexus.version}.zip"
                }
             } 
           }
