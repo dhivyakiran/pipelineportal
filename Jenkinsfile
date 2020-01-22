@@ -152,7 +152,7 @@ stages
       }*/
       stage('UnZip the application')
       {
-         //when {expression{(pipelinetype != "build")}} 
+         //when {expression{(pipelinetype != "deploy")}} 
          steps 
          {
             script
@@ -162,7 +162,7 @@ stages
                def artifact = appdata.artifact.size()
                for (int i = 0; i < artifact; i++) 
                {
-		       unzip dir: "${appdata.artifact[i]}/portalfiles/", glob: '', zipFile: "${appdata.artifact[i]}-${mydatas.nexus.version}.zip"
+		       unzip dir: "../${appdata.artifact[i]}/portalfiles/", glob: '', zipFile: "${appdata.artifact[i]}-${mydatas.nexus.version}.zip"
                }
             } 
           }
