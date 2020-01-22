@@ -2,9 +2,7 @@ node
 {
    git url: 'https://github.com/dhivyakiran/pipelineportal.git'
    mydatas = readYaml file: "pipeline.yml"
-  
 }
-
 pipeline 
 {
 agent
@@ -14,7 +12,6 @@ agent
 environment 
 {
    envname="${params.envname}"
-
 }
 stages 
 {
@@ -22,8 +19,7 @@ stages
     {
         steps 
         {
-            
-           script 
+            script 
             {
                 if(envname=="dev" || envname=="int")
                 {
@@ -42,17 +38,16 @@ stages
      }
     stage("Source code checkout") 
     {
-       
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-            script
-              {
-               git branch: mydatas.giturl.branch, url: mydatas.giturl.path
-               appdata = readYaml file: envname+".yml"
-			   sh "cp -R /home/jenkins/portal/portals/aflac ."
-              }
-        }
+          script
+          {
+             git branch: mydatas.giturl.branch, url: mydatas.giturl.path
+             appdata = readYaml file: envname+".yml"
+	     sh "cp -R /home/jenkins/portal/portals/aflac ."
+          }
+       }
     }
     stage('Download Dependencies')
     {
@@ -89,13 +84,15 @@ stages
     stage("SonarQube code analysis") 
     {
         when {expression{(pipelinetype != "deploy")}}
-          //environment { scannerHome = tool 'SonarQubeScanner' }
-        steps {
-           withSonarQubeEnv('sonarqube') { sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"}
-          //sh "sonar-scanner -X"
+        steps 
+	{
+           withSonarQubeEnv('sonarqube') 
+           { 
+           sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
+	   }
         }
      }
-     stage("SonarQube Quality Gate") 
+     /*stage("SonarQube Quality Gate") 
      {
         when {expression{(pipelinetype != "deploy")}}
         steps 
@@ -106,7 +103,7 @@ stages
             }
         }
      }
-    /* stage("Security scan") 
+     stage("Security scan") 
     {
         when {expression{(pipelinetype != "deploy")}}
         steps 
