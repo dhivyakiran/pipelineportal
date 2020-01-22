@@ -100,7 +100,7 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-            timeout(time: 10, unit: 'MINUTES') 
+            timeout(time: 30, unit: 'SECONDS') 
             {
                waitForQualityGate abortPipeline: true
             }
