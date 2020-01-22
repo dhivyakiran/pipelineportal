@@ -132,7 +132,7 @@ stages
 				sh "cp -r aflac ${appdata.artifact[i]}"
 				sh "rm -rf aflac/apps/sales*"
 				}
-
+			echo "credentials: ${mydatas.nexus.credentialsId}"
                     zip archive: true, dir: "aflac", zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
                   nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], classifier: '', file: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip", type:'zip']], credentialsId: mydatas.nexus.credentialsId, groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusUrl, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: mydatas.nexus.version          
                 //nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], file: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip", type:'zip']], credentialsId: 'nexus', groupId: 'portal', nexusUrl: '10.250.1.155:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'portal', version: '1.2'          
