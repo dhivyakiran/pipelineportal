@@ -162,7 +162,7 @@ stages
                def artifact = appdata.artifact.size()
                for (int i = 0; i < artifact; i++) 
                {
-		       unzip dir: "../${appdata.artifact[i]}/portalfiles/", glob: '', zipFile: "${appdata.artifact[i]}-${mydatas.nexus.version}.zip"
+		       unzip dir: "./${appdata.artifact[i]}/portalfiles/", glob: '', zipFile: "./${appdata.artifact[i]}/portal/${appdata.artifact[i]}-${mydatas.nexus.version}.zip"
                }
             } 
           }
