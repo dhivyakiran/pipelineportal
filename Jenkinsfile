@@ -135,6 +135,21 @@ stages
              } 
          }
       }
+      stage('Download the artifact')
+      {
+         steps
+         {
+            script
+            {
+               def artifact = appdata.artifact.size()
+               for (int i = 0; i < artifact; i++) 
+               {
+           // sh "wget ${mydatas.nexus.protocol}"+"://"+${mydatas.nexus.nexusUrl}+"/repository/"+${mydatas.nexus.repository}+"/"+${mydatas.nexus.groupId}+"/"+${appdata.artifact[i]}+"/"+${mydatas.nexus.version}+"/"+${appdata.artifact[i]}+"-"+${mydatas.nexus.version.zip}+" -P ./"+${appdata.artifact[i]}+"/"
+              sh "wget ${mydatas.nexus.protocol}"+"://"+${mydatas.nexus.nexusUrl}+"/repository/"+${mydatas.nexus.repository}+"/"+${mydatas.nexus.groupId}+"/"+${appdata.artifact[i]}+"/"+${mydatas.nexus.version}+"/"+${appdata.artifact[i]}+"-"+${mydatas.nexus.version}+".zip -P ./"+${appdata.artifact[i]}+"/"
+	       }
+             }
+         }
+      }
    }
 }
 
