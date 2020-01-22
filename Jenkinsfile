@@ -7,7 +7,7 @@ pipeline
 {
 agent
 {
-   label "slave1"
+   label "master"
 }
 environment 
 {
@@ -110,7 +110,7 @@ stages
         {
             echo "security scan"
         }
-    }
+    }*/
    stage('zip the app and upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
@@ -138,7 +138,7 @@ stages
          {
             script
             {
-	       //sh "mkdir members/portal"    
+	       sh "mkdir ${appdata.artifact[i]}/portal"
                def artifact = appdata.artifact.size()
                for (int i = 0; i < artifact; i++) 
                {
@@ -154,8 +154,7 @@ stages
          {
             script
             {
-		//sh "mkdir members/portalfiles" 
-		//sh "mkdir agent/portalfiles" 
+	       sh "mkdir ${appdata.artifact[i]}/portalfiles" 
                def artifact = appdata.artifact.size()
                for (int i = 0; i < artifact; i++) 
                {
@@ -163,7 +162,7 @@ stages
                }
             } 
           }
-       }*/
+       }
    }
 }
 
