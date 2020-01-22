@@ -43,6 +43,7 @@ stages
         {
           script
           {
+             deleteDir()
              git branch: mydatas.giturl.branch, url: mydatas.giturl.path
              appdata = readYaml file: envname+".yml"
 	     sh "cp -R /home/jenkins/portals/aflac ."
