@@ -128,11 +128,11 @@ stages
 		  {
 		    sh "rm -rf aflac/apps/sales*"
 		  }
-		  if(appdata.artifact[i] != "agent") 
+		  elseif(appdata.artifact[i] != "agent") 
 		  {
 		    sh "rm -rf aflac/apps/agent*"
 		  }
-	          if(appdata.artifact[i] != "member") 
+	          else
 		  {
 	            sh "rm -rf aflac/apps/member*"
 		  }
