@@ -122,21 +122,19 @@ stages
                 def artifact = appdata.artifact.size()
                 for (int i = 0; i < artifact; i++) 
                 {
-		  sh "mkdir ${appdata.artifact[i]}"	
+		  sh "mkdir ${appdata.artifact[i]}"
+		  sh "cp -r aflac ${appdata.artifact[i]}"
                   if(appdata.artifact[i] != "sales") 
 		  {
-		    sh "cp -r aflac ${appdata.artifact[i]}"
 		    sh "rm -rf aflac/apps/sales*"
 		  }
 		  if(appdata.artifact[i] != "agent") 
 		  {
-		    sh "cp -r aflac ${appdata.artifact[i]}"
 		    sh "rm -rf aflac/apps/agent*"
 		  }
 	          if(appdata.artifact[i] != "member") 
 		  {
-		    sh "cp -r aflac ${appdata.artifact[i]}"
-		    sh "rm -rf aflac/apps/member*"
+	            sh "rm -rf aflac/apps/member*"
 		  }
                  zip archive: true, dir: "aflac", zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
                  nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], file: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip", type:'zip']], credentialsId: 'nexus', groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: mydatas.nexus.version          
