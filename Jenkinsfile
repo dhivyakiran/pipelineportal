@@ -1,6 +1,6 @@
 node 
 {
-   git url: 'https://github.com/dhivyakiran/pipelineportal.git'
+   git branch: 'master', url: 'https://github.com/dhivyakiran/pipelineportal.git'
    mydatas = readYaml file: "pipeline.yml"
 }
 pipeline 
@@ -43,10 +43,10 @@ stages
         {
           script
           {
-             deleteDir()
+		  deleteDir()
              git branch: mydatas.giturl.branch, url: mydatas.giturl.path
              appdata = readYaml file: envname+".yml"
-	     sh "cp -R /home/jenkins/portals/aflac ."
+	     sh "cp -R /home/jenkins/portal/portals/aflac ."
           }
        }
     }
@@ -81,7 +81,7 @@ stages
         {
             sh 'npm run code-coverage'
         }
-    }
+    }*/
     stage("SonarQube code analysis") 
     {
         when {expression{(pipelinetype != "deploy")}}
@@ -122,10 +122,19 @@ stages
                 def artifact = appdata.artifact.size()
                 for (int i = 0; i < artifact; i++) 
                 {
+		  sh "mkdir ${appdata.artifact[i]}"
+		  sh "cp -r aflac ${appdata.artifact[i]}"
                   if(appdata.artifact[i] != "sales") 
 		  {
-		    sh "cp -r aflac ${appdata.artifact[i]}"
 		    sh "rm -rf aflac/apps/sales*"
+		  }
+		  if(appdata.artifact[i] != "agent") 
+		  {
+		    sh "rm -rf aflac/apps/agent*"
+		  }
+	          if(appdata.artifact[i] != "member") 
+		  {
+	            sh "rm -rf aflac/apps/member*"
 		  }
                  zip archive: true, dir: "aflac", zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
                  nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], file: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip", type:'zip']], credentialsId: 'nexus', groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: mydatas.nexus.version          
@@ -139,10 +148,11 @@ stages
          {
             script
             {
-	       sh "mkdir ${appdata.artifact[i]}/portal"
+	       
                def artifact = appdata.artifact.size()
                for (int i = 0; i < artifact; i++) 
                {
+		 sh "mkdir ${appdata.artifact[i]}/portal"      
                 sh "wget http://${mydatas.nexus.nexusUrl}/repository/${mydatas.nexus.repository}/${mydatas.nexus.groupId}/${appdata.artifact[i]}/${mydatas.nexus.version}/${appdata.artifact[i]}-${mydatas.nexus.version}.zip -P ./${appdata.artifact[i]}/portal/"
 	       }
              }
@@ -155,10 +165,11 @@ stages
          {
             script
             {
-	       sh "mkdir ${appdata.artifact[i]}/portalfiles" 
+	      
                def artifact = appdata.artifact.size()
                for (int i = 0; i < artifact; i++) 
                {
+		   sh "mkdir ${appdata.artifact[i]}/portalfiles"      
 		  unzip dir: "./${appdata.artifact[i]}/portalfiles/", glob: '', zipFile: "./${appdata.artifact[i]}/portal/${appdata.artifact[i]}-${mydatas.nexus.version}.zip"
                }
             } 
