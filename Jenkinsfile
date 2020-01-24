@@ -74,14 +74,14 @@ stages
             sh 'npm run affected:test'
         }
     }
-    /*stage("Sonar Code Coverage") 
+    stage("Sonar Code Coverage") 
     {
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
             sh 'npm run code-coverage'
         }
-    }
+    }/*
     stage("SonarQube code analysis") 
     {
         when {expression{(pipelinetype != "deploy")}}
