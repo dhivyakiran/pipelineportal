@@ -58,7 +58,7 @@ stages
             sh 'npm install'
         }
     }
-   /* stage("TS Linting") 
+    stage("TS Linting") 
     {
         when {expression{(pipelinetype != "deploy")}}
         steps 
@@ -74,14 +74,14 @@ stages
             sh 'npm run affected:test'
         }
     }
-    stage("Sonar Code Coverage") 
+    /*stage("Sonar Code Coverage") 
     {
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
             sh 'npm run code-coverage'
         }
-    }*/
+    }
     stage("SonarQube code analysis") 
     {
         when {expression{(pipelinetype != "deploy")}}
@@ -206,12 +206,12 @@ stages
           }
        }*/
    }
-   post 
+  /* post 
    {
      always 
      {
         emailext body: "${currentBuild.absoluteUrl} has result ${currentBuild.result}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: "${currentBuild.result} pipeline: ${currentBuild.fullDisplayName}"
      }
-   }
+   }*/
 }
 
