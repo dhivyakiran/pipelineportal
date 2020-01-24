@@ -100,15 +100,15 @@ stages
                    sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
 	        }
 	      }
-	      else if(appdata.artifact[i]=="member")
-	     {
+	      if(appdata.artifact[i]=="member")
+	      {
 		sh "cp -r sonar-member.properties sonar-project.properties" 
 		withSonarQubeEnv('sonarqube') 
                 { 
                    sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
 	        }
 	      }
-	      else
+	      if(appdata.artifact[i]=="sales")
 	      {
 		sh "cp -r sonar-sales.properties sonar-project.properties" 
 		withSonarQubeEnv('sonarqube') 
