@@ -87,14 +87,37 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
 	{
-		script{
-	def artifact = appdata.artifact.size()
-		echo "${artifact}"
-		}
-           /*withSonarQubeEnv('sonarqube') 
-           { 
-           sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
-	   }*/
+	 script
+	 {
+	   def artifact = appdata.artifact.size()
+	   for (int i = 0; i < artifact; i++) 
+           {
+	     if(appdata.artifact[i]=="agent")
+	     {
+		sh "cp -r sonar-agent.properties sonar-project.properties" 
+		withSonarQubeEnv('sonarqube') 
+                { 
+                   sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
+	        }
+	      }
+	      else if(appdata.artifact[i]=="member")
+	     {
+		sh "cp -r sonar-member.properties sonar-project.properties" 
+		withSonarQubeEnv('sonarqube') 
+                { 
+                   sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
+	        }
+	      }
+	      else
+	      {
+		sh "cp -r sonar-sales.properties sonar-project.properties" 
+		withSonarQubeEnv('sonarqube') 
+                { 
+                   sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
+	        }     
+	      }
+	    }
+          }
         }
      }
      /*stage("SonarQube Quality Gate") 
