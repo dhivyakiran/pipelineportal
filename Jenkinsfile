@@ -87,8 +87,10 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
 	{
+		script{
 	def artifact = appdata.artifact.size()
 		echo "${artifact}"
+		}
            /*withSonarQubeEnv('sonarqube') 
            { 
            sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
