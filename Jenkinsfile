@@ -206,5 +206,12 @@ stages
           }
        }*/
    }
+   post 
+   {
+     always 
+     {
+        emailext body: "${currentBuild.absoluteUrl} has result ${currentBuild.result}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: "${currentBuild.result} pipeline: ${currentBuild.fullDisplayName}"
+     }
+   }
 }
 
