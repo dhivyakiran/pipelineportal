@@ -43,7 +43,7 @@ stages
         {
           script
           {
-		  deleteDir()
+	     deleteDir()
              git branch: mydatas.giturl.branch, url: mydatas.giturl.path
              appdata = readYaml file: envname+".yml"
 	     sh "cp -R /home/jenkins/portals/aflac ."
@@ -124,17 +124,20 @@ stages
                 {
 		  sh "mkdir ${appdata.artifact[i]}"
 		  sh "cp -r aflac ${appdata.artifact[i]}"
-                  if(appdata.artifact[i] != "sales") 
+                  if(appdata.artifact[i] == "sales") 
+		  {
+		    sh "rm -rf aflac/apps/member*"
+		    sh "rm -rf aflac/apps/agent*"
+		  }
+		  else if(appdata.artifact[i] == "agent") 
 		  {
 		    sh "rm -rf aflac/apps/sales*"
-		  }
-		  else if(appdata.artifact[i] != "agent") 
-		  {
-		    sh "rm -rf aflac/apps/agent*"
+		    sh "rm -rf aflac/apps/member*"
 		  }
 	          else
 		  {
-	            sh "rm -rf aflac/apps/member*"
+	            sh "rm -rf aflac/apps/agent*"
+		    sh "rm -rf aflac/apps/sales*"
 		  }
                  zip archive: true, dir: "aflac", zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
                  nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], file: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip", type:'zip']], credentialsId: 'nexus', groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: mydatas.nexus.version          
