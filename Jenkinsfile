@@ -82,7 +82,7 @@ stages
             sh 'npm run code-coverage'
         }
     }*/
-    /*stage("SonarQube code analysis") 
+    stage("SonarQube code analysis") 
     {
         when {expression{(pipelinetype != "deploy")}}
         steps 
@@ -92,7 +92,7 @@ stages
            sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
 	   }
         }
-     }*/
+     }
      /*stage("SonarQube Quality Gate") 
      {
         when {expression{(pipelinetype != "deploy")}}
@@ -111,7 +111,7 @@ stages
         {
             echo "security scan"
         }
-    }*/
+    }
    stage('zip the app and upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
@@ -177,7 +177,7 @@ stages
                }
             } 
           }
-       }
+       }*/
    }
 }
 
