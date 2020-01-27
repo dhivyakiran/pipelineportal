@@ -37,7 +37,7 @@ stages
              }
          }
      }
-    stage("Source code checkout") 
+    stage("Checkout") 
     {
         when {expression{(pipelinetype != "deploy")}}
         steps 
@@ -65,7 +65,7 @@ stages
         }
     }
 	}
-   /* stage("TS Linting") 
+   /* stage("Linting") 
     {
         when {expression{(pipelinetype != "deploy")}}
         steps 
