@@ -90,15 +90,17 @@ stages
         }
     } */
 	
-	/*stage("Build") 
+	stage("Build") 
     {
-         when {expression{(pipelinetype != "deploy")}}
+        when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-           sh 'npm run affected:build -- --plain --base development'
+           dir('portal'){
+		   /*sh 'npm run affected:build -- --plain --base development'*/
 		   sh 'npm run build'
+		   }
         }
-    }*/
+    }
     stage("SonarQube code analysis") 
     {
         when {expression{(pipelinetype != "deploy")}}
