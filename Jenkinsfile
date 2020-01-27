@@ -1,9 +1,5 @@
 node 
 {
-    def exists = fileExists 'pipeline'
-    if (!exists){
-        new File('pipeline').mkdir()
-	}
    git branch: 'development', url: 'https://github.com/dhivyakiran/pipelineportal.git'
    mydatas = readYaml file: "pipeline.yml"
 }
@@ -45,23 +41,28 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-          script
+          dir('portal'){
+		  script
           {
 			 deleteDir()
+			 
              git branch: mydatas.giturl.branch, url: mydatas.giturl.path
              appdata = readYaml file: envname+".yml"
 			 sh "cp -R /home/jenkins/portals/* ."
           }
+		}
        }
     }
     stage('Download Dependencies')
     {
         when {expression{(pipelinetype != "deploy")}}
+		dir('portal'){
         steps 
         {
             sh 'npm install'
         }
     }
+	}
    /* stage("TS Linting") 
     {
         when {expression{(pipelinetype != "deploy")}}
@@ -101,6 +102,7 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
 	{
+	dir('portal'){
 	 script
 	 {
 	   def artifact = appdata.artifact.size()
@@ -127,6 +129,7 @@ stages
           }
         }
      }
+	 }
      /*stage("SonarQube Quality Gate") 
      {
         when {expression{(pipelinetype != "deploy")}}
