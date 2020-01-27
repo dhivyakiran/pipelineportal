@@ -58,14 +58,14 @@ stages
             sh 'npm install'
         }
     }
-    stage("TS Linting") 
+   /* stage("TS Linting") 
     {
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-          /* sh 'npm run affected:lint -- --plain --base development'*/
+          sh 'npm run affected:lint -- --plain --base development'
         }
-    }
+    }*/
     stage("Unit Testcase") 
     {
         when {expression{(pipelinetype != "deploy")}}
@@ -81,7 +81,7 @@ stages
         {
             sh 'npm run code-coverage'
         }
-    }/*
+    }*/
 	
 	stage("Build") 
     {
