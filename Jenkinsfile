@@ -73,7 +73,7 @@ stages
         {
             sh 'npm run affected:test -- --plain --base development'
         }
-    }*/
+    }
     stage("Code Coverage") 
     {
         when {expression{(pipelinetype != "deploy")}}
@@ -81,14 +81,15 @@ stages
         {
             sh 'npm run code-coverage'
         }
-    }
+    } */
 	
 	stage("Build") 
     {
          when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-           sh 'npm run affected:build -- --plain --base development'
+         /*  sh 'npm run affected:build -- --plain --base development'*/
+		   sh 'npm run build'
         }
     }
     stage("SonarQube code analysis") 
@@ -100,31 +101,24 @@ stages
 	 {
 	   def artifact = appdata.artifact.size()
 	   for (int i = 0; i < artifact; i++) 
-           {
+        {
 	     if(appdata.artifact[i]=="agent")
 	     {
-		sh "cp -r sonar-agent.properties sonar-project.properties" 
-		withSonarQubeEnv('sonarqube') 
+			sh "cp -r sonar-agent.properties sonar-project.properties" 
+		 }
+	     if(appdata.artifact[i]=="member")
+	      {
+			sh "cp -r sonar-member.properties sonar-project.properties" 
+		   }
+		 if(appdata.artifact[i]=="sales")
+		 {
+			sh "cp -r sonar-sales.properties sonar-project.properties" 
+		 }  
+		 withSonarQubeEnv('sonarqube') 
                 { 
                    sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
 	        }
-	      }
-	      if(appdata.artifact[i]=="member")
-	      {
-		sh "cp -r sonar-member.properties sonar-project.properties" 
-		withSonarQubeEnv('sonarqube') 
-                { 
-                   sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
-	        }
-	      }
-	      if(appdata.artifact[i]=="sales")
-	      {
-		sh "cp -r sonar-sales.properties sonar-project.properties" 
-		withSonarQubeEnv('sonarqube') 
-                { 
-                   sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
-	        }     
-	      }
+	     
 	    }
           }
         }
@@ -151,7 +145,7 @@ stages
 	
 	
 	
-   stage('zip the app and upload the artifact')
+   stage('Upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
         steps 
