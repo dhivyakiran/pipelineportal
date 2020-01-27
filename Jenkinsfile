@@ -70,7 +70,7 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-          sh 'npm run affected:lint -- --plain --base master'
+          sh 'npm run affected:lint -- --plain --base=origin/master'
         }
     }*/
     /*stage("Unit Testcase") 
