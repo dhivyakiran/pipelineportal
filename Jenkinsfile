@@ -56,9 +56,10 @@ stages
     stage('Download Dependencies')
     {
         when {expression{(pipelinetype != "deploy")}}
-		dir('portal'){
+		
         steps 
         {
+			dir('portal'){
             sh 'npm install'
         }
     }
