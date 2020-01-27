@@ -74,7 +74,7 @@ stages
             sh 'npm run affected:test -- --plain --base development'
         }
     }
-    stage("Code Coverage") 
+    /*stage("Code Coverage") 
     {
         when {expression{(pipelinetype != "deploy")}}
         steps 
