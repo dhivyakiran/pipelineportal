@@ -63,7 +63,7 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-          // sh 'npm run affected:lint -- --plain --base development'
+          /* sh 'npm run affected:lint -- --plain --base development'*/
         }
     }
     stage("Unit Testcase") 
