@@ -15,7 +15,7 @@ environment
 }
 stages 
 {
-   stage('Environment Initialization') 
+   stage('Initialization') 
     {
         steps 
         {
@@ -43,10 +43,10 @@ stages
         {
           script
           {
-	     deleteDir()
+			 deleteDir()
              git branch: mydatas.giturl.branch, url: mydatas.giturl.path
              appdata = readYaml file: envname+".yml"
-	     sh "cp -R /home/jenkins/portals/* ."
+			 sh "cp -R /home/jenkins/portals/* ."
           }
        }
     }
@@ -194,7 +194,7 @@ stages
                def artifact = appdata.artifact.size()
                for (int i = 0; i < artifact; i++) 
                {
-		 sh "mkdir ${appdata.artifact[i]}/portal"      
+				sh "mkdir ${appdata.artifact[i]}/portal"      
                 sh "wget http://${mydatas.nexus.nexusUrl}/repository/${mydatas.nexus.repository}/${mydatas.nexus.groupId}/${appdata.artifact[i]}/${mydatas.nexus.version}/${appdata.artifact[i]}-${mydatas.nexus.version}.zip -P ./${appdata.artifact[i]}/portal/"
 	       }
              }
