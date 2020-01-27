@@ -63,7 +63,7 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-           sh 'npm run affected:lint -- --plain --base development'
+          // sh 'npm run affected:lint -- --plain --base development'
         }
     }
     stage("Unit Testcase") 
@@ -71,7 +71,7 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-            sh 'npm run affected:test'
+            sh 'npm run affected:test -- --plain --base development'
         }
     }
     /*stage("Sonar Code Coverage") 
@@ -88,7 +88,7 @@ stages
          when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-           sh 'npm run affected:build'
+           sh 'npm run affected:build -- --plain --base development'
         }
     }
     stage("SonarQube code analysis") 
