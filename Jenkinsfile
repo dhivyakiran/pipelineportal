@@ -155,25 +155,8 @@ stages
                 def artifact = appdata.artifact.size()
                 for (int i = 0; i < artifact; i++) 
                 {
-		  sh "mkdir ${appdata.artifact[i]}"
-		  sh "cp -r aflac ${appdata.artifact[i]}"
-                  if(appdata.artifact[i] == "sales") 
-		  {
-		    sh "rm -rf ${appdata.artifact[i]}/aflac/apps/member*"
-		    sh "rm -rf ${appdata.artifact[i]}/aflac/apps/agent*"
-		  }
-		  else if(appdata.artifact[i] == "agent") 
-		  {
-		    sh "rm -rf ${appdata.artifact[i]}/aflac/apps/sales*"
-		    sh "rm -rf ${appdata.artifact[i]}/aflac/apps/member*"
-		  }
-	          else
-		  {
-	            sh "rm -rf ${appdata.artifact[i]}/aflac/apps/agent*"
-		    sh "rm -rf ${appdata.artifact[i]}/aflac/apps/sales*"
-		  }
-			zip archive: true, dir: "${appdata.artifact[i]}/aflac", zipFile: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip" 
-                 nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], file: appdata.artifact[i]+"/"+"${currentBuild.number}/"+appdata.artifact[i]+"_${currentBuild.number}.zip", type:'zip']], credentialsId: 'nexus', groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: mydatas.nexus.version          
+		     	zip archive: true, dir: "/dist/${appdata.artifact[i]}", zipFile: appdata.artifact[i]+".zip" 
+                nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], file: "/dist"+appdata.artifact[i].zip", type:'zip']], credentialsId: 'nexus', groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: mydatas.nexus.version          
 	         }
              } 
          }
