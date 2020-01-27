@@ -65,7 +65,7 @@ stages
         {
           sh 'npm run affected:lint -- --plain --base development'
         }
-    }
+    }*/
     stage("Unit Testcase") 
     {
         when {expression{(pipelinetype != "deploy")}}
@@ -83,7 +83,7 @@ stages
         }
     } */
 	
-	stage("Build") 
+	/*stage("Build") 
     {
          when {expression{(pipelinetype != "deploy")}}
         steps 
@@ -91,7 +91,7 @@ stages
          /*  sh 'npm run affected:build -- --plain --base development'*/
 		   sh 'npm run build'
         }
-    }
+    }*/
     stage("SonarQube code analysis") 
     {
         when {expression{(pipelinetype != "deploy")}}
