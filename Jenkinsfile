@@ -96,7 +96,7 @@ stages
         steps 
         {
            dir('portal'){
-		   sh 'npm run build -- --plain --base development'
+		   sh 'npm run affected:build --all '
 		   /*sh 'npm run build'*/
 		   }
         }
