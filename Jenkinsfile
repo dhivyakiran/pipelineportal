@@ -1,5 +1,6 @@
 node 
 {
+   deleteDir()
    git branch: 'development', url: 'https://github.com/dhivyakiran/pipelineportal.git'
    mydatas = readYaml file: "pipeline.yml"
 }
