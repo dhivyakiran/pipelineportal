@@ -88,7 +88,7 @@ stages
          when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-         /*  sh 'npm run affected:build -- --plain --base development'*/
+           sh 'npm run affected:build -- --plain --base development'
 		   sh 'npm run build'
         }
     }*/
