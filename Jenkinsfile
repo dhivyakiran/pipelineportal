@@ -1,5 +1,9 @@
 node 
 {
+    def exists = fileExists 'pipeline'
+    if (!exists){
+        new File('pipeline').mkdir()
+	}
    git branch: 'development', url: 'https://github.com/dhivyakiran/pipelineportal.git'
    mydatas = readYaml file: "pipeline.yml"
 }
@@ -155,8 +159,8 @@ stages
                 def artifact = appdata.artifact.size()
                 for (int i = 0; i < artifact; i++) 
                 {
-		     	zip archive: true, dir: "/dist/${appdata.artifact[i]}", zipFile: appdata.artifact[i]+".zip" 
-                nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], file: "/dist"+appdata.artifact[i].zip", type:'zip']], credentialsId: 'nexus', groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: mydatas.nexus.version          
+		     	zip archive: true, dir: "/dist/apps/${appdata.artifact[i]}", zipFile: appdata.artifact[i]+".zip" 
+                nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], file: "/dist/apps/"+appdata.artifact[i].zip", type:'zip']], credentialsId: 'nexus', groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: mydatas.nexus.version          
 	         }
              } 
          }
