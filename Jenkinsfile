@@ -63,7 +63,7 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-           sh 'npm run affected:lint'
+           sh 'npm run affected:lint -- --plain --base development'
         }
     }
     stage("Unit Testcase") 
@@ -74,7 +74,7 @@ stages
             sh 'npm run affected:test'
         }
     }
-    stage("Sonar Code Coverage") 
+    /*stage("Sonar Code Coverage") 
     {
         when {expression{(pipelinetype != "deploy")}}
         steps 
@@ -82,6 +82,15 @@ stages
             sh 'npm run code-coverage'
         }
     }/*
+	
+	stage("Build") 
+    {
+         when {expression{(pipelinetype != "deploy")}}
+        steps 
+        {
+           sh 'npm run affected:build'
+        }
+    }
     stage("SonarQube code analysis") 
     {
         when {expression{(pipelinetype != "deploy")}}
@@ -139,6 +148,9 @@ stages
             echo "security scan"
         }
     }
+	
+	
+	
    stage('zip the app and upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
