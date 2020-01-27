@@ -78,7 +78,7 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-            sh 'npm run affected:test -- --plain --base master'
+            sh 'npm run affected:test -- --plain --base=origin/master'
         }
     }*/
     /*stage("Code Coverage") 
@@ -96,7 +96,7 @@ stages
         steps 
         {
            dir('portal'){
-		   sh 'npm run affected:build -- --all --base=origin/master'
+		   sh 'npm run affected:build -- --all'
 		   /*sh 'npm run build'*/ 
 		   }
         }
