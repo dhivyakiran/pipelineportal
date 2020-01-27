@@ -70,7 +70,7 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-          sh 'npm run affected:lint -- --plain --base development'
+          sh 'npm run affected:lint -- --plain --base master'
         }
     }*/
     /*stage("Unit Testcase") 
@@ -78,7 +78,7 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-            sh 'npm run affected:test -- --plain --base development'
+            sh 'npm run affected:test -- --plain --base master'
         }
     }*/
     /*stage("Code Coverage") 
@@ -96,7 +96,7 @@ stages
         steps 
         {
            dir('portal'){
-		   sh 'npm run affected:build -- --plain --base development'
+		   sh 'npm run affected:build -- --plain --base master'
 		   /*sh 'npm run build'*/
 		   }
         }
