@@ -89,7 +89,7 @@ stages
         {
             sh 'npm run code-coverage'
         }
-    } 
+    } */
     stage("Build") 
     {
       when {expression{(pipelinetype != "deploy")}}
