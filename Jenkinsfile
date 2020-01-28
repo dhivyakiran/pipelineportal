@@ -101,7 +101,7 @@ stages
         }
       }
     }
-    /*stage("SonarQube code analysis") 
+    stage("SonarQube code analysis") 
     {
       when {expression{(pipelinetype != "deploy")}}
       steps 
@@ -129,31 +129,24 @@ stages
 	     withSonarQubeEnv('sonarqube') 
              { 
                 sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
+				 timeout(time: 30, unit: 'SECONDS') 
+				{
+					waitForQualityGate abortPipeline: true
+				}
 	     }
 	   }
          }
       }
     }
  }
-   /*  stage("SonarQube Quality Gate") 
-     {
-        when {expression{(pipelinetype != "deploy")}}
-        steps 
-        {
-            timeout(time: 30, unit: 'SECONDS') 
-            {
-               waitForQualityGate abortPipeline: true
-            }
-        }
-     }
-     stage("Security scan") 
+	stage("Security scan") 
     {
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
             echo "security scan"
         }
-    }*/
+    }
     stage('Upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
