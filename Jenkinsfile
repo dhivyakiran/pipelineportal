@@ -116,15 +116,15 @@ stages
 	   def artifact = applist.apps.size()
 	   for (int i = 0; i < artifact; i++) 
         {
-	     if(appdata.artifact[i]=="agent")
+	     if(applist.apps[i]=="agent")
 	     {
 			sh "cp -r sonar-agent.properties sonar-project.properties" 
 		 }
-	     if(appdata.artifact[i]=="member")
+	     if(applist.apps[i]=="member")
 	      {
 			sh "cp -r sonar-member.properties sonar-project.properties" 
 		   }
-		 if(appdata.artifact[i]=="sales")
+		 if(applist.apps[i]=="sales")
 		 {
 			sh "cp -r sonar-sales.properties sonar-project.properties" 
 		 }  
@@ -171,8 +171,8 @@ stages
 				def artifact = applist.apps.size()
                 for (int i = 0; i < artifact; i++) 
                 {
-		     	zip archive: true, dir: "/dist/apps/${appdata.artifact[i]}", zipFile: appdata.artifact[i]+".zip" 
-                nexusArtifactUploader artifacts: [[artifactId: appdata.artifact[i], file: "/dist/apps/"+appdata.artifact[i].zip", type:'zip']], credentialsId: 'nexus', groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: mydatas.nexus.version          
+		     	zip archive: true, dir: "/dist/apps/${applist.apps[i]}", zipFile: applist.apps[i]+".zip" 
+                nexusArtifactUploader artifacts: [[artifactId: applist.apps[i], file: "/dist/apps/"+applist.apps[i].zip", type:'zip']], credentialsId: 'nexus', groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: mydatas.nexus.version          
 	         }
              } 
          }
