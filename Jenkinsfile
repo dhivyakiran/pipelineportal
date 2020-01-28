@@ -154,7 +154,7 @@ stages
         {
             echo "security scan"
         }
-    }
+    }*/
     stage('Upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
@@ -169,12 +169,12 @@ stages
                 for (int i = 0; i < artifact; i++) 
                 {
  		 zip archive: true, dir: "dist/apps/${applist.apps[i]}", zipFile: "dist/apps/${applist.apps[i]}.zip"
-                 nexusArtifactUploader artifacts: [[artifactId: applist.apps[i], file: "dist/apps/${applist.apps[i]}.zip", type:'zip']], credentialsId: 'nexus', groupId: "${currentBuild.number}", nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: appdata.artifactversion
+                 nexusArtifactUploader artifacts: [[artifactId: applist.apps[i], file: "dist/apps/${applist.apps[i]}.zip", type:'zip']], credentialsId: 'nexus', groupId: "${currentBuild.number}", nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: 'latest'
 		}
              } 
            }
         }
-      } */
+      }
       stage('Download the artifact')
       {
          steps
@@ -182,11 +182,11 @@ stages
             script
             {
 	       
-               def artifact = appdata.artifact.size()
+               def artifact = appdata.deployment_artifacts.size()
                for (int i = 0; i < artifact; i++) 
                {
-		sh "mkdir ${appdata.artifact[i]}"      
-                sh "wget http://${mydatas.nexus.nexusUrl}/repository/${mydatas.nexus.repository}/${appdata.deployversion}/${appdata.artifact[i]}/${appdata.artifactversion}/${appdata.artifact[i]}-${appdata.artifactversion}.zip -P ${appdata.artifact[i]}/"
+		sh "mkdir ${appdata.deployment_artifacts[i]}"      
+                sh "wget http://${mydatas.nexus.nexusUrl}/repository/${mydatas.nexus.repository}/${appdata.deploy_version}/${appdata.deployment_artifacts[i]}/latest/${appdata.deployment_artifacts[i]}-latest.zip -P ${appdata.deployment_artifacts[i]}/"
 	       }
              }
          }
@@ -199,11 +199,11 @@ stages
             script
             {
 	      
-               def artifact = appdata.artifact.size()
+               def artifact = appdata.deployment_artifacts.size()
                for (int i = 0; i < artifact; i++) 
                {
 		   //sh "mkdir ${appdata.artifact[i]}/portalfiles"      
-		  unzip dir: "${appdata.artifact[i]}/", glob: '', zipFile: "${appdata.artifact[i]}/${appdata.artifact[i]}-${appdata.artifactversion}.zip"
+		  unzip dir: "${appdata.deployment_artifacts[i]}/", glob: '', zipFile: "${appdata.deployment_artifacts[i]}/${appdata.deployment_artifacts[i]}-latest.zip"
                }
             } 
           }
