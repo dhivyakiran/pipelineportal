@@ -107,10 +107,11 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
 	{
-		apps = readYaml file: "affected.yml"
+		
 	dir('portal'){
 	 script
 	 {
+	   apps = readYaml file: "affected.yml"
 	   def artifact = appdata.artifact.size()
 	   for (int i = 0; i < artifact; i++) 
         {
