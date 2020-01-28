@@ -90,7 +90,7 @@ stages
             sh 'npm run code-coverage'
         }
     } */
-    stage("Build") 
+    stage("Build the app folder") 
     {
       when {expression{(pipelinetype != "deploy")}}
       steps 
@@ -98,7 +98,6 @@ stages
         dir('portal')
 	{
 	  sh 'npm run affected:build -- --base=origin/master'
-		   //sh 'npm run build'
         }
       }
     }
@@ -198,11 +197,9 @@ stages
          {
             script
             {
-	      
                def artifact = appdata.deployment_artifacts.size()
                for (int i = 0; i < artifact; i++) 
                {
-		   //sh "mkdir ${appdata.artifact[i]}/portalfiles"      
 		  unzip dir: "${appdata.deployment_artifacts[i]}/", glob: '', zipFile: "${appdata.deployment_artifacts[i]}/${appdata.deployment_artifacts[i]}-latest.zip"
                }
             } 
