@@ -62,7 +62,8 @@ stages
         {
 			dir('portal'){
             sh 'npm install'
-			sh "npm run affected:apps -- --base=origin/master>|grep '-'>affected.yml"
+			sh 'npm run affected:apps -- --base=origin/master>temp.yml'
+			sh " cat temp.yml| grep ' - '>affetced.yml"
         }
     }
 	}
