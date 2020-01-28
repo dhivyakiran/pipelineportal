@@ -8,7 +8,7 @@ pipeline
 {
 agent
 {
-   label "master"
+	label "${mydatas.agentname}"
 }
 environment 
 {
@@ -43,30 +43,29 @@ stages
         steps 
         {
           dir('portal'){
-		  script
+          script
           {
-			 deleteDir()
-			 
-             git branch: mydatas.giturl.branch, url: mydatas.giturl.path
+	     deleteDir()
+	     git branch: mydatas.giturl.branch, url: mydatas.giturl.path
              appdata = readYaml file: envname+".yml"
-			 sh "cp -R /home/jenkins/portals/* ."
+	     sh "cp -R /home/jenkins/portals/* ."
           }
-		}
-       }
+	}
+      }
     }
     stage('Download Dependencies')
     {
-        when {expression{(pipelinetype != "deploy")}}
-		
-        steps 
-        {
-			dir('portal'){
-            sh 'npm install'
-			sh 'npm run affected:apps -- --base=origin/master>temp.yml'
-			sh " cat temp.yml| grep ' - '>>affected.yml"
-        }
-    }
-	}
+       when {expression{(pipelinetype != "deploy")}}
+       steps 
+       {
+	  dir('portal')
+	  {
+          sh 'npm install'
+	  sh 'npm run affected:apps -- --base=origin/master>temp.yml'
+	  sh " cat temp.yml| grep ' - '>>affected.yml"
+          }
+       }
+     }
    /* stage("Linting") 
     {
         when {expression{(pipelinetype != "deploy")}}
@@ -91,53 +90,52 @@ stages
             sh 'npm run code-coverage'
         }
     } */
-	
-	stage("Build") 
+    stage("Build") 
     {
-        when {expression{(pipelinetype != "deploy")}}
-        steps 
-        {
-           dir('portal'){
-		   sh 'npm run affected:build -- --base=origin/master'
+      when {expression{(pipelinetype != "deploy")}}
+      steps 
+      {
+        dir('portal')
+	{
+	  sh 'npm run affected:build -- --base=origin/master'
 		   /*sh 'npm run build'*/ 
-		   }
         }
+      }
     }
     stage("SonarQube code analysis") 
     {
-        when {expression{(pipelinetype != "deploy")}}
-        steps 
+      when {expression{(pipelinetype != "deploy")}}
+      steps 
+      {
+	dir('portal')
 	{
-		
-	dir('portal'){
 	 script
 	 {
 	   applist = readYaml file: "affected.yml"
 	   def artifact = applist.apps.size()
 	   for (int i = 0; i < artifact; i++) 
-        {
+           {
 	     if(applist.apps[i]=="agent")
 	     {
-			sh "cp -r sonar-agent.properties sonar-project.properties" 
-		 }
+	        sh "cp -r sonar-agent.properties sonar-project.properties" 
+	     }
 	     if(applist.apps[i]=="member")
-	      {
-			sh "cp -r sonar-member.properties sonar-project.properties" 
-		   }
-		 if(applist.apps[i]=="sales")
-		 {
-			sh "cp -r sonar-sales.properties sonar-project.properties" 
-		 }  
-		 withSonarQubeEnv('sonarqube') 
-            { 
-                  sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
-	        }
-	     
-	    }
-          }
-        }
-     }
-	 }
+	     {
+		sh "cp -r sonar-member.properties sonar-project.properties" 
+	     }
+	     if(applist.apps[i]=="sales")
+	     {
+		sh "cp -r sonar-sales.properties sonar-project.properties" 
+             }  
+	     withSonarQubeEnv('sonarqube') 
+             { 
+                sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
+	     }
+	   }
+         }
+      }
+    }
+ }
    /*  stage("SonarQube Quality Gate") 
      {
         when {expression{(pipelinetype != "deploy")}}
@@ -157,26 +155,26 @@ stages
             echo "security scan"
         }
     }
-	
-	 stage('Upload the artifact')
+    stage('Upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
         steps 
         {
-            dir('portal'){
-			script
-            {
+          dir('portal')
+	  {
+	     script
+             {
                 def applist = readYaml file: "affected.yml"
-				def artifact = applist.apps.size()
+		def artifact = applist.apps.size()
                 for (int i = 0; i < artifact; i++) 
                 {
-		     	zip archive: true, dir: "dist/apps/${applist.apps[i]}", zipFile: applist.apps[i]+".zip" 
-                /*nexusArtifactUploader artifacts: [[artifactId: applist.apps[i], file: "dist/apps/"+applist.apps[i].zip", type:'zip']], credentialsId: 'nexus', groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: mydatas.nexus.version */
-				}
+ 		 zip archive: true, dir: "dist/apps/${applist.apps[i]}", zipFile: "dist/apps/${applist.apps[i]}_${currentBuild.number}.zip"
+                 nexusArtifactUploader artifacts: [[artifactId: applist.apps[i], file: "dist/apps/${applist.apps[i]}_${currentBuild.number}.zip", type:'zip']], credentialsId: 'nexus', groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: ${currentBuild.number}
+		}
              } 
-         }
-      }
-	 } 
+           }
+        }
+      } 
      /* stage('Download the artifact')
       {
          steps
