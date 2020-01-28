@@ -62,7 +62,7 @@ stages
         {
 			dir('portal'){
             sh 'npm install'
-			sh 'npm run affected:apps -- --base=origin/master>affected.yml'
+			sh "npm run affected:apps -- --base=origin/master>|grep '-'>affected.yml"
         }
     }
 	}
@@ -72,7 +72,7 @@ stages
         steps 
         {
           sh 'npm run affected:lint -- --base=origin/master'
-        }
+        } 
     }*/
     /*stage("Unit Testcase") 
     {
