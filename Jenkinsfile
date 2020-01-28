@@ -168,7 +168,7 @@ stages
 		def artifact = applist.apps.size()
                 for (int i = 0; i < artifact; i++) 
                 {
- 		 zip archive: true, dir: "dist/apps/${applist.apps[i]}", zipFile: "dist/apps/${applist.apps[i]}_${currentBuild.number}.zip"
+ 		 zip archive: true, dir: "dist/apps/${applist.apps[i]}", zipFile: "dist/apps/${applist.apps[i]}/${applist.apps[i]}_${currentBuild.number}.zip"
                  nexusArtifactUploader artifacts: [[artifactId: applist.apps[i], file: "dist/apps/${applist.apps[i]}_${currentBuild.number}.zip", type:'zip']], credentialsId: 'nexus', groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: "${currentBuild.number}"
 		}
              } 
@@ -185,8 +185,8 @@ stages
                def artifact = appdata.artifact.size()
                for (int i = 0; i < artifact; i++) 
                {
-				sh "mkdir ${appdata.artifact[i]}/portal"      
-                sh "wget http://${mydatas.nexus.nexusUrl}/repository/${mydatas.nexus.repository}/${mydatas.nexus.groupId}/${appdata.artifact[i]}/${mydatas.nexus.version}/${appdata.artifact[i]}-${mydatas.nexus.version}.zip -P ./${appdata.artifact[i]}/portal/"
+		sh "mkdir ${appdata.artifact[i]}/portal"      
+                sh "wget http://${mydatas.nexus.nexusUrl}/repository/${mydatas.nexus.repository}/${mydatas.nexus.groupId}/${appdata.artifact[i]}/${currentBuild.number}/${appdata.artifact[i]}-${currentBuild.number}.zip -P portal/dist/apps/${appdata.artifact[i]}/download/"
 	       }
              }
          }
@@ -203,7 +203,7 @@ stages
                for (int i = 0; i < artifact; i++) 
                {
 		   sh "mkdir ${appdata.artifact[i]}/portalfiles"      
-		  unzip dir: "./${appdata.artifact[i]}/portalfiles/", glob: '', zipFile: "./${appdata.artifact[i]}/portal/${appdata.artifact[i]}-${mydatas.nexus.version}.zip"
+		  unzip dir: "portal/dist/apps/${appdata.artifact[i]}/unzipfiles/", glob: '', zipFile: "./${appdata.artifact[i]}/portal/${appdata.artifact[i]}-${mydatas.nexus.version}.zip"
                }
             } 
           }
