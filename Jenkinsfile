@@ -163,9 +163,10 @@ stages
         when {expression{(pipelinetype != "deploy")}} 
         steps 
         {
-            script
+            dir('portal'){
+			script
             {
-                applist = readYaml file: "affected.yml"
+                def applist = readYaml file: "affected.yml"
 				def artifact = applist.apps.size()
                 for (int i = 0; i < artifact; i++) 
                 {
@@ -175,7 +176,7 @@ stages
              } 
          }
       }
-	  
+	 } 
      /* stage('Download the artifact')
       {
          steps
