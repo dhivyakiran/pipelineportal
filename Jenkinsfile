@@ -89,7 +89,7 @@ stages
         {
             sh 'npm run code-coverage'
         }
-    } 
+    } */
     stage("Build") 
     {
       when {expression{(pipelinetype != "deploy")}}
@@ -98,11 +98,11 @@ stages
         dir('portal')
 	{
 	  sh 'npm run affected:build -- --base=origin/master'
-		   /*sh 'npm run build'
+		   //sh 'npm run build'
         }
       }
     }
-    stage("SonarQube code analysis") 
+    /*stage("SonarQube code analysis") 
     {
       when {expression{(pipelinetype != "deploy")}}
       steps 
