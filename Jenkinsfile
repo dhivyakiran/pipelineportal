@@ -89,7 +89,7 @@ stages
         {
             sh 'npm run code-coverage'
         }
-    } */
+    } 
     stage("Build") 
     {
       when {expression{(pipelinetype != "deploy")}}
@@ -154,7 +154,7 @@ stages
         {
             echo "security scan"
         }
-    }*/
+    }
     stage('Upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
@@ -174,8 +174,8 @@ stages
              } 
            }
         }
-      } 
-     /* stage('Download the artifact')
+      } */
+      stage('Download the artifact')
       {
          steps
          {
@@ -185,8 +185,8 @@ stages
                def artifact = appdata.artifact.size()
                for (int i = 0; i < artifact; i++) 
                {
-		sh "mkdir ${appdata.artifact[i]}/portal"      
-                sh "wget http://${mydatas.nexus.nexusUrl}/repository/${mydatas.nexus.repository}/${mydatas.nexus.groupId}/${appdata.artifact[i]}/${currentBuild.number}/${appdata.artifact[i]}-${currentBuild.number}.zip -P portal/dist/apps/${appdata.artifact[i]}/download/"
+		sh "mkdir ${appdata.artifact[i]}"      
+                sh "wget http://${mydatas.nexus.nexusUrl}/repository/${mydatas.nexus.repository}/${appdata.deployversion}/${appdata.artifact[i]}/${appdata.artifactversion}/${appdata.artifact[i]}-${appdata.artifactversion}.zip -P ${appdata.artifact[i]}/"
 	       }
              }
          }
@@ -202,8 +202,8 @@ stages
                def artifact = appdata.artifact.size()
                for (int i = 0; i < artifact; i++) 
                {
-		   sh "mkdir ${appdata.artifact[i]}/portalfiles"      
-		  unzip dir: "portal/dist/apps/${appdata.artifact[i]}/unzipfiles/", glob: '', zipFile: "./${appdata.artifact[i]}/portal/${appdata.artifact[i]}-${mydatas.nexus.version}.zip"
+		   //sh "mkdir ${appdata.artifact[i]}/portalfiles"      
+		  unzip dir: "${appdata.artifact[i]}/", glob: '', zipFile: "${appdata.artifact[i]}/${appdata.artifact[i]}-${appdata.artifactversion}.zip"
                }
             } 
           }
