@@ -90,7 +90,7 @@ stages
             sh 'npm run code-coverage'
         }
     } */
-    stage("Build the app folder") 
+    stage("Build the affected folder") 
     {
       when {expression{(pipelinetype != "deploy")}}
       steps 
