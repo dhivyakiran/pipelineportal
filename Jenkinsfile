@@ -138,7 +138,7 @@ stages
         }
      }
 	 }
-     /*stage("SonarQube Quality Gate") 
+     stage("SonarQube Quality Gate") 
      {
         when {expression{(pipelinetype != "deploy")}}
         steps 
@@ -167,7 +167,8 @@ stages
         {
             script
             {
-                def artifact = appdata.artifact.size()
+                applist = readYaml file: "affected.yml"
+				def artifact = applist.apps.size()
                 for (int i = 0; i < artifact; i++) 
                 {
 		     	zip archive: true, dir: "/dist/apps/${appdata.artifact[i]}", zipFile: appdata.artifact[i]+".zip" 
@@ -176,6 +177,7 @@ stages
              } 
          }
       }
+	  /*
       stage('Download the artifact')
       {
          steps
