@@ -129,17 +129,27 @@ stages
 	     withSonarQubeEnv('sonarqube') 
              { 
                 sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
-				 timeout(time: 30, unit: 'SECONDS') 
-				{
-					waitForQualityGate abortPipeline: true
-				}
+				
 	     }
 	   }
          }
       }
     }
  }
-	stage("Security scan") 
+		stage("SonarQube Quality Gate") 
+		{
+        when {expression{(pipelinetype != "deploy")}}
+        steps 
+        {
+		dir('portal'){
+            timeout(time: 30, unit: 'SECONDS') 
+            {
+               waitForQualityGate abortPipeline: true
+            }
+        }
+		}
+     }
+     stage("Security scan") 
     {
         when {expression{(pipelinetype != "deploy")}}
         steps 
