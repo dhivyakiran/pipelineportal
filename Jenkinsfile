@@ -138,7 +138,7 @@ stages
         }
      }
 	 }
-     stage("SonarQube Quality Gate") 
+   /*  stage("SonarQube Quality Gate") 
      {
         when {expression{(pipelinetype != "deploy")}}
         steps 
@@ -148,7 +148,7 @@ stages
                waitForQualityGate abortPipeline: true
             }
         }
-     }
+     }*/
      stage("Security scan") 
     {
         when {expression{(pipelinetype != "deploy")}}
@@ -158,9 +158,7 @@ stages
         }
     }
 	
-	
-	/*
-   stage('Upload the artifact')
+	 stage('Upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
         steps 
@@ -178,7 +176,7 @@ stages
          }
       }
 	  
-      stage('Download the artifact')
+     /* stage('Download the artifact')
       {
          steps
          {
