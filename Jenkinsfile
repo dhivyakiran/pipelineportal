@@ -62,6 +62,7 @@ stages
         {
 			dir('portal'){
             sh 'npm install'
+			sh 'npm run affected:apps -- --plain --base=origin/master>affected.yml'
         }
     }
 	}
@@ -70,7 +71,7 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-          sh 'npm run affected:lint -- --plain --base=origin/master'
+          sh 'npm run affected:lint -- --base=origin/master'
         }
     }*/
     /*stage("Unit Testcase") 
@@ -78,7 +79,7 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
         {
-            sh 'npm run affected:test -- --plain --base=origin/master'
+            sh 'npm run affected:test -- --base=origin/master'
         }
     }*/
     /*stage("Code Coverage") 
@@ -96,7 +97,7 @@ stages
         steps 
         {
            dir('portal'){
-		   sh 'npm run affected:build -- --all'
+		   sh 'npm run affected:build -- --base=origin/master'
 		   /*sh 'npm run build'*/ 
 		   }
         }
@@ -106,6 +107,7 @@ stages
         when {expression{(pipelinetype != "deploy")}}
         steps 
 	{
+		apps = readYaml file: "affected.yml"
 	dir('portal'){
 	 script
 	 {
