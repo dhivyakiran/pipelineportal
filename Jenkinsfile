@@ -89,7 +89,7 @@ stages
         {
             sh 'npm run code-coverage'
         }
-    } */
+    } 
     stage("Build") 
     {
       when {expression{(pipelinetype != "deploy")}}
@@ -98,7 +98,7 @@ stages
         dir('portal')
 	{
 	  sh 'npm run affected:build -- --base=origin/master'
-		   /*sh 'npm run build'*/ 
+		   /*sh 'npm run build'
         }
       }
     }
@@ -146,7 +146,7 @@ stages
                waitForQualityGate abortPipeline: true
             }
         }
-     }*/
+     }
      stage("Security scan") 
     {
         when {expression{(pipelinetype != "deploy")}}
@@ -154,7 +154,7 @@ stages
         {
             echo "security scan"
         }
-    }
+    }*/
     stage('Upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
@@ -169,7 +169,7 @@ stages
                 for (int i = 0; i < artifact; i++) 
                 {
  		 zip archive: true, dir: "dist/apps/${applist.apps[i]}", zipFile: "dist/apps/${applist.apps[i]}_${currentBuild.number}.zip"
-                 nexusArtifactUploader artifacts: [[artifactId: applist.apps[i], file: "dist/apps/${applist.apps[i]}_${currentBuild.number}.zip", type:'zip']], credentialsId: 'nexus', groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: ${currentBuild.number}
+                 nexusArtifactUploader artifacts: [[artifactId: applist.apps[i], file: "dist/apps/${applist.apps[i]}_${currentBuild.number}.zip", type:'zip']], credentialsId: 'nexus', groupId: mydatas.nexus.groupId, nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: currentBuild.number
 		}
              } 
            }
