@@ -62,7 +62,7 @@ stages
         {
 			dir('portal'){
             sh 'npm install'
-			sh 'npm run affected:apps -- --plain --base=origin/master>affected.yml'
+			sh 'npm run affected:apps -- --base=origin/master>affected.yml'
         }
     }
 	}
