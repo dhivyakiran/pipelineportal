@@ -63,7 +63,7 @@ stages
 			dir('portal'){
             sh 'npm install'
 			sh 'npm run affected:apps -- --base=origin/master>temp.yml'
-			sh " cat temp.yml| grep ' - '>affetced.yml"
+			sh " cat temp.yml| grep ' - '>>affetced.yml"
         }
     }
 	}
@@ -112,8 +112,8 @@ stages
 	dir('portal'){
 	 script
 	 {
-	   apps = readYaml file: "affected.yml"
-	   def artifact = appdata.artifact.size()
+	   applist = readYaml file: "affected.yml"
+	   def artifact = applist.apps.size()
 	   for (int i = 0; i < artifact; i++) 
         {
 	     if(appdata.artifact[i]=="agent")
