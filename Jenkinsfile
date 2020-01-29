@@ -62,6 +62,7 @@ stages
 	  {
           sh 'npm install'
 	  sh 'npm run affected:apps -- --base=origin/master>temp.yml'
+	  sh "echo apps:\n >" affected.yml
 	  sh " cat temp.yml| grep ' - '>>affected.yml"
           }
        }
@@ -139,7 +140,7 @@ stages
       }
     }
  }
-    stage("SonarQube Quality Gate") 
+  /*  stage("SonarQube Quality Gate") 
     {
       when {expression{(pipelinetype != "deploy")}}
       steps 
@@ -152,7 +153,7 @@ stages
           }
         }
       }
-    }
+    }*/
     stage("Security scan") 
     {
       when {expression{(pipelinetype != "deploy")}}
