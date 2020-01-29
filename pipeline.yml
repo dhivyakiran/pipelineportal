@@ -10,8 +10,8 @@ nexus:
  protocol: http
  repository: portal
  version: '1.0'
-sonarqube:
- url: 
+test: 'true'
+sonar: 'true'
 dev_s3bucket:
  salesurl:
  agenturl:
