@@ -91,7 +91,7 @@ stages
             sh 'npm run code-coverage'
         }
     } */
-    stage("Build the affected folder") 
+    /*stage("Build the affected folder") 
     {
       when {expression{(pipelinetype != "deploy")}}
       steps 
@@ -101,7 +101,7 @@ stages
 	  sh 'npm run affected:build -- --base=origin/master'
         }
       }
-    }
+    }*/
     stage("SonarQube code analysis") 
     {
       when {expression{(pipelinetype != "deploy")}}
@@ -132,8 +132,7 @@ stages
 		}
 			withSonarQubeEnv('sonarqube') 
              { 
-                sh "echo $prop"
-				sh "cp -r ../sonar-$prop.properties sonar-project.properties" 
+                sh "cp -r ../sonar${prop}.properties sonar-project.properties" 
 				sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
 	     }
          }
