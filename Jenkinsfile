@@ -139,7 +139,7 @@ stages
       }
     }
  }
-  /*  stage("SonarQube Quality Gate") 
+    stage("SonarQube Quality Gate") 
     {
       when {expression{(pipelinetype != "deploy")}}
       steps 
@@ -152,7 +152,7 @@ stages
           }
         }
       }
-    }*/
+    }
     stage("Security scan") 
     {
       when {expression{(pipelinetype != "deploy")}}
