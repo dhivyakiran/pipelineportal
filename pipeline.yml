@@ -11,7 +11,7 @@ nexus:
  repository: portal
  version: '1.0'
 test: 'true'
-sonar: 'true'
+sonar: 'false'
 dev_s3bucket:
  salesurl:
  agenturl:
