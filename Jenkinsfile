@@ -115,7 +115,7 @@ stages
 	   def artifact = applist.apps.size()
 	   def prop = ""
 	   for (int i = 0; i < artifact; i++) 
-           {
+        {
 	     if(applist.apps[i]=="agent")
 	     {
 	        prop = prop + "-agent"
@@ -133,7 +133,7 @@ stages
 			withSonarQubeEnv('sonarqube') 
              { 
                 sh "echo $prop"
-				sh "cp -r ../sonar-agent-member.properties sonar-project.properties" 
+				sh "cp -r ../sonar-$prop.properties sonar-project.properties" 
 				sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
 	     }
          }
@@ -172,11 +172,11 @@ stages
 	     script
              {
                 def applist = readYaml file: "affected.yml"
-		def artifact = applist.apps.size()
+				def artifact = applist.apps.size()
                 for (int i = 0; i < artifact; i++) 
                 {
- 		 zip archive: true, dir: "dist/apps/${applist.apps[i]}", zipFile: "dist/apps/${applist.apps[i]}.zip"
-                 nexusArtifactUploader artifacts: [[artifactId: applist.apps[i], file: "dist/apps/${applist.apps[i]}.zip", type:'zip']], credentialsId: 'nexus', groupId: "${currentBuild.number}", nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: 'latest'
+					zip archive: true, dir: "dist/apps/${applist.apps[i]}", zipFile: "dist/apps/${applist.apps[i]}.zip"
+					nexusArtifactUploader artifacts: [[artifactId: applist.apps[i], file: "dist/apps/${applist.apps[i]}.zip", type:'zip']], credentialsId: 'nexus', groupId: "${currentBuild.number}", nexusUrl: mydatas.nexus.nexusUrl, nexusVersion: mydatas.nexus.nexusVersion, protocol: mydatas.nexus.protocol, repository: mydatas.nexus.repository, version: 'latest'
 		}
              } 
            }
@@ -184,7 +184,8 @@ stages
       }
       stage('Download the artifact')
       {
-         steps
+         when {expression{(pipelinetype = "deploy")}} 
+		 steps
          {
             script
             {
@@ -192,7 +193,7 @@ stages
                def artifact = appdata.deployment_artifacts.size()
                for (int i = 0; i < artifact; i++) 
                {
-		sh "mkdir ${appdata.deployment_artifacts[i]}"      
+				sh "mkdir ${appdata.deployment_artifacts[i]}"      
                 sh "wget http://${mydatas.nexus.nexusUrl}/repository/${mydatas.nexus.repository}/${appdata.deploy_version}/${appdata.deployment_artifacts[i]}/latest/${appdata.deployment_artifacts[i]}-latest.zip -P ${appdata.deployment_artifacts[i]}/"
 	       }
              }
@@ -200,7 +201,7 @@ stages
       }
       stage('Unzip the application')
       {
-         when {expression{(pipelinetype != "deploy")}} 
+         when {expression{(pipelinetype = "deploy")}} 
          steps 
          {
             script
@@ -208,7 +209,7 @@ stages
                def artifact = appdata.deployment_artifacts.size()
                for (int i = 0; i < artifact; i++) 
                {
-		  unzip dir: "${appdata.deployment_artifacts[i]}/", glob: '', zipFile: "${appdata.deployment_artifacts[i]}/${appdata.deployment_artifacts[i]}-latest.zip"
+				unzip dir: "${appdata.deployment_artifacts[i]}/", glob: '', zipFile: "${appdata.deployment_artifacts[i]}/${appdata.deployment_artifacts[i]}-latest.zip"
                }
             } 
           }
