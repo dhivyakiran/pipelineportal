@@ -91,7 +91,7 @@ stages
             sh 'npm run code-coverage'
         }
     } */
-    /*stage("Build the affected folder") 
+    stage("Build the affected folder") 
     {
       when {expression{(pipelinetype != "deploy")}}
       steps 
@@ -101,7 +101,7 @@ stages
 	  sh 'npm run affected:build -- --base=origin/master'
         }
       }
-    }*/
+    }
     stage("Static code analysis") 
     {
       when {expression{(pipelinetype != "deploy")}}
@@ -146,7 +146,7 @@ stages
       {
 	dir('portal')
 	{
-          timeout(time: 60, unit: 'SECONDS') 
+          timeout(time: 30, unit: 'SECONDS') 
           {
             waitForQualityGate abortPipeline: true
           }
