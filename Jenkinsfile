@@ -78,7 +78,7 @@ stages
     }
     stage("Unit Testcase") 
     {
-        when {expression{(pipelinetype != "deploy")}}
+        when {expression{(pipelinetype != "deploy") || (mydatas.test == 'true')}}
         steps 
         {
             sh 'npm run affected:test -- --base=origin/master'
@@ -105,7 +105,7 @@ stages
     }
     stage("Static code analysis") 
     {
-		when {expression{(pipelinetype != "deploy")}}
+		when {expression{(pipelinetype != "deploy") || (mydatas.sonar == 'true')}}
 		steps 
 		{
 			dir('portal')
