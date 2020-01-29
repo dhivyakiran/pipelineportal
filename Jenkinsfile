@@ -127,13 +127,14 @@ stages
 	     {
 			prop = prop + "-sales"
 		     }  
-	     withSonarQubeEnv('sonarqube') 
+	     
+		}
+			withSonarQubeEnv('sonarqube') 
              { 
                 sh "echo $prop"
-				sh "cp -r sonar-agent-member.properties sonar-project.properties" 
+				sh "cp -r ../sonar-agent-member.properties sonar-project.properties" 
 				sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
 	     }
-	   }
          }
       }
     }
