@@ -112,23 +112,26 @@ stages
 	 {
 	   applist = readYaml file: "affected.yml"
 	   def artifact = applist.apps.size()
+	   def prop = ""
 	   for (int i = 0; i < artifact; i++) 
            {
 	     if(applist.apps[i]=="agent")
 	     {
-	        sh "cp -r sonar-agent.properties sonar-project.properties" 
+	        prop = prop + "-agent"
 	     }
 	     if(applist.apps[i]=="member")
 	     {
-		sh "cp -r sonar-member.properties sonar-project.properties" 
-	     }
+			prop = prop + "-member"
+		 }
 	     if(applist.apps[i]=="sales")
 	     {
-		sh "cp -r sonar-sales.properties sonar-project.properties" 
-             }  
+			prop = prop + "-sales"
+		     }  
 	     withSonarQubeEnv('sonarqube') 
              { 
-                sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
+                sh "echo $prop"
+				sh "cp -r sonar-agent-member.properties sonar-project.properties" 
+				sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
 	     }
 	   }
          }
