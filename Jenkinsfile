@@ -58,13 +58,13 @@ stages
        when {expression{(pipelinetype != "deploy")}}
        steps 
        {
-	  dir('portal')
-	  {
-          sh 'npm install'
-	  sh 'npm run affected:apps -- --base=origin/master>temp.yml'
-	  sh "echo 'apps:' >affected.yml"
-	  sh " cat temp.yml| grep ' - '>>affected.yml"
-          }
+		dir('portal')
+		{
+			sh 'npm install'
+			sh 'npm run affected:apps -- --base=origin/master>temp.yml'
+			sh "echo 'apps:' >affected.yml"
+			sh " cat temp.yml| grep ' - '>>affected.yml"
+         }
        }
      }
    /* stage("Linting") 
