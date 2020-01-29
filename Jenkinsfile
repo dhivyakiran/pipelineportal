@@ -146,7 +146,7 @@ stages
       {
 	dir('portal')
 	{
-          timeout(time: 30, unit: 'SECONDS') 
+          timeout(time: 60, unit: 'SECONDS') 
           {
             waitForQualityGate abortPipeline: true
           }
