@@ -8,7 +8,7 @@ pipeline
 {
 agent
 {
-	label "${mydatas.agentname}"
+   label "${mydatas.agentname}"
 }
 environment 
 {
@@ -129,33 +129,33 @@ stages
 	     withSonarQubeEnv('sonarqube') 
              { 
                 sh "/opt/Jenkins/sonar-scanner-4.2.0.1873/bin/sonar-scanner"
-				
 	     }
 	   }
          }
       }
     }
  }
-		stage("SonarQube Quality Gate") 
-		{
-        when {expression{(pipelinetype != "deploy")}}
-        steps 
-        {
-		dir('portal'){
-            timeout(time: 30, unit: 'SECONDS') 
-            {
-               waitForQualityGate abortPipeline: true
-            }
-        }
-		}
-     }
-     stage("Security scan") 
+    stage("SonarQube Quality Gate") 
     {
-        when {expression{(pipelinetype != "deploy")}}
-        steps 
-        {
-            echo "security scan"
+      when {expression{(pipelinetype != "deploy")}}
+      steps 
+      {
+	dir('portal')
+	{
+          timeout(time: 30, unit: 'SECONDS') 
+          {
+            waitForQualityGate abortPipeline: true
+          }
         }
+      }
+    }
+    stage("Security scan") 
+    {
+      when {expression{(pipelinetype != "deploy")}}
+      steps 
+      {
+         echo "security scan"
+      }
     }
     stage('Upload the artifact')
     {
