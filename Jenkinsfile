@@ -105,7 +105,7 @@ stages
     }
     stage("Static code analysis") 
     {
-		when {expression{(pipelinetype != "deploy") || (mydatas.sonar == 'true')}}
+		when {expression{(pipelinetype != "deploy") || (mydatas.sonar == "true")}}
 		steps 
 		{
 			dir('portal')
@@ -141,7 +141,7 @@ stages
 	}
     stage("SonarQube Quality Gate") 
     {
-		when {expression{(pipelinetype != "deploy")}}
+		when {expression{(pipelinetype != "deploy") || (mydatas.sonar == "true")}}
 		steps 
 		{
 			dir('portal')
