@@ -102,7 +102,7 @@ stages
         }
       }
     }*/
-    stage("SonarQube code analysis") 
+    stage("Static code analysis") 
     {
       when {expression{(pipelinetype != "deploy")}}
       steps 
