@@ -22,11 +22,11 @@ stages
         {
             script 
             {
-                if(envname=="dev" || envname=="int")
+                if(envname=="dev")
                 {
                   pipelinetype = "build_deploy"
                 }
-                else if(envname=="uat" || envname=="qa" || envname=="prod")
+                else if(envname=="int"||envname=="uat" || envname=="qa" || envname=="prod")
                 {
                   pipelinetype = "deploy"
                 }
