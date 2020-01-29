@@ -141,7 +141,7 @@ stages
 	}
     stage("SonarQube Quality Gate") 
     {
-		when {expression{(pipelinetype != "deploy") || (mydatas.sonar == "true")}}
+		when {expression{(pipelinetype != "deploy") && (mydatas.sonar == "true")}}
 		steps 
 		{
 			dir('portal')
