@@ -62,7 +62,7 @@ stages
 	  {
           sh 'npm install'
 	  sh 'npm run affected:apps -- --base=origin/master>temp.yml'
-	  sh "echo apps:\n >" affected.yml
+	  sh "echo 'apps:\n' >affected.yml"
 	  sh " cat temp.yml| grep ' - '>>affected.yml"
           }
        }
