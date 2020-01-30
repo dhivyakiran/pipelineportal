@@ -179,38 +179,38 @@ stages
 					}
 				} 
 			}
-        }
+     }
     }
     stage('Download the artifact')
     {
-        when {expression{(pipelinetype == "deploy")}} 
-		steps
+      when {expression{(pipelinetype == "deploy")}} 
+		  steps
+      {
+			 script
         {
-			script
-            {
-	            def artifact = appdata.deployment_artifacts.size()
-				for (int i = 0; i < artifact; i++) 
-				{
+	        def artifact = appdata.deployment_artifacts.size()
+				  for (int i = 0; i < artifact; i++) 
+				  {
 					sh "mkdir ${appdata.deployment_artifacts[i]}"      
 					sh "wget http://${mydatas.nexus.nexusUrl}/repository/${mydatas.nexus.repository}/${appdata.deploy_version}/${appdata.deployment_artifacts[i]}/latest/${appdata.deployment_artifacts[i]}-latest.zip -P ${appdata.deployment_artifacts[i]}/"
-				}
-			}
-        }
+				 }
+			 }
+      }
     }
     stage('Unzip the application')
     {
         when {expression{(pipelinetype == "deploy")}} 
         steps 
         {
-            script
-            {
-				def artifact = appdata.deployment_artifacts.size()
-				for (int i = 0; i < artifact; i++) 
-				{
-					unzip dir: "${appdata.deployment_artifacts[i]}/", glob: '', zipFile: "${appdata.deployment_artifacts[i]}/${appdata.deployment_artifacts[i]}-latest.zip"
-				}
-            } 
-        }
+         script
+         {
+				  def artifact = appdata.deployment_artifacts.size()
+				  for (int i = 0; i < artifact; i++) 
+				  {
+					 unzip dir: "${appdata.deployment_artifacts[i]}/", glob: '', zipFile: "${appdata.deployment_artifacts[i]}/${appdata.deployment_artifacts[i]}-latest.zip"
+				  }
+         } 
+       }
     }
 }   
 	post 
