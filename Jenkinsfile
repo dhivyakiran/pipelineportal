@@ -68,7 +68,7 @@ stages
 			}
 		}
     }
-	/*stage("Linting") 
+    stage("Linting") 
     {
 		when {expression{(pipelinetype != "deploy")}}
         steps 
@@ -84,7 +84,7 @@ stages
             sh 'npm run affected:test -- --base=origin/master'
         }
     }
-    stage("Code Coverage") 
+    /*stage("Code Coverage") 
     {
         when {expression{(pipelinetype != "deploy")}}
         steps 
@@ -211,7 +211,7 @@ stages
 				}
             } 
         }
-    }*/
+    }
 }   
 	post 
 	{
