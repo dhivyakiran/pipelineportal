@@ -103,7 +103,7 @@ stages
 			}
 		}
     }
-    stage("Static code analysis") 
+    /*stage("Static code analysis") 
     {
 		when {expression{(pipelinetype != "deploy") && (mydatas.sonar == "true")}}
 		steps 
@@ -160,7 +160,7 @@ stages
 		{
 			echo "security scan"
 		}
-    }
+    }*/
     stage('Upload the artifact')
     {
         when {expression{(pipelinetype != "deploy")}} 
