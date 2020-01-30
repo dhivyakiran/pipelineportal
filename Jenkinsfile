@@ -103,7 +103,7 @@ stages
 			}
 		}
     }
-    stage("Static code analysis") 
+   /* stage("Static code analysis") 
     {
 		when {expression{(pipelinetype != "deploy") && (mydatas.sonar == true)}}
 		steps 
@@ -211,13 +211,13 @@ stages
 				  }
          } 
        }
-    }
+    }*/
 }   
 	post 
 	{
 		always 
 		{
-			emailext attachLog: true, body: "${currentBuild.absoluteUrl} has result ${currentBuild.result}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: "${currentBuild.result} pipeline: ${currentBuild.fullDisplayName}", to: "Dhivya.K@cognizant.com"
+			emailext attachLog: true, body: "${currentBuild.absoluteUrl} has result ${currentBuild.result}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: "${currentBuild.result} pipeline: ${currentBuild.fullDisplayName}", to: "dhivya.krish15@gmail.com"
 		}
 	}
 }
