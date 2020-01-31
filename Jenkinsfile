@@ -64,7 +64,7 @@ stages
 				sh 'npm install'
 				sh 'npm run affected:apps -- --base=origin/master>temp.yml'
 				sh "echo 'apps:' >affected.yml"
-				sh " cat temp.yml| grep ' - '>>affected.yml"
+				sh " cat temp.yml| grep ' - '|sort>>affected.yml"
 			}
 		}
     }
