@@ -217,7 +217,7 @@ stages
 	{
 		always 
 		{
-			emailext attachLog: true, body: "Result: ${currentBuild.result}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: "Pipeline: ${currentBuild.fullDisplayName}", to: "dhivya.krish15@gmail.com,cc: dhivyakrish1491@gmail.com,bcc: abmrazak@gmail.com"
+			emailext attachLog: true, body: "Result: ${currentBuild.result}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: "Pipeline: ${currentBuild.fullDisplayName}", to: "dhivya.krish15@gmail.com,cc: dhivyakrish1491@gmail.com,bcc: xxx@gmail.com"
 		}
 	}
 }
