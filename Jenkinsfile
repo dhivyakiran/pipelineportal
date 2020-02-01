@@ -47,10 +47,9 @@ stages
 				script
 				{	
 					git branch: mydatas.giturl.branch, url: mydatas.giturl.path
-					if(envname != "dev")
-					{
+					
 						appdata = readYaml file: envname+".yml"
-					}
+					
 					sh "cp -R /home/jenkins/portals/* ."
 				}
 			}
@@ -88,7 +87,7 @@ stages
     }
     stage("Code Coverage") 
     {
-        when {expression{(pipelinetype != "deploy")}}
+        when {expression{(pipelinetype != "deploy") && (mydatas.test == true)}}
         steps 
         {
             sh 'npm run code-coverage'
