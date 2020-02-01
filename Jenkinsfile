@@ -1,8 +1,8 @@
 node 
 {
-   deleteDir()
-   git branch: 'development', url: 'https://github.com/dhivyakiran/pipelineportal.git'
-   mydatas = readYaml file: "pipeline.yml"
+    deleteDir()
+	 git branch: 'development', url: 'https://github.com/dhivyakiran/pipelineportal.git'
+	 mydatas = readYaml file: "pipeline.yml"
 }
 pipeline 
 {
@@ -46,9 +46,11 @@ stages
 			{
 				script
 				{	
-					deleteDir()
 					git branch: mydatas.giturl.branch, url: mydatas.giturl.path
-					appdata = readYaml file: envname+".yml"
+					if(envname != "dev")
+					{
+						appdata = readYaml file: envname+".yml"
+					}
 					sh "cp -R /home/jenkins/portals/* ."
 				}
 			}
