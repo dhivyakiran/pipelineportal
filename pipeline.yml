@@ -17,6 +17,6 @@ s3bucket:
     agent: dev-salesportal-agent
     member: dev-salesportal-members
  int:
-    sales: dev-salesportal-sales
-    agent: dev-salesportal-agent
-    member: dev-salesportal-members
+    sales: int-salesportal-sales
+    agent: int-salesportal-agent
+    member: int-salesportal-members
