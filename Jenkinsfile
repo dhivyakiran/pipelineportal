@@ -222,8 +222,9 @@ stages
         {
          script
          {
-				  def artifact = appdata.deployment_artifacts.size()
-		 if(envname=="dev"){
+		 if(envname=="dev"){		 
+		 def artifact = appdata.deployment_artifacts.size()
+		
 				  for (int i = 0; i < artifact; i++) 
 				  {
 					if(applist.apps[i]=="sales")
@@ -243,6 +244,7 @@ stages
 		 }
 		 else
 		 {
+			 def artifact = appdata.deployment_artifacts.size()
 			for (int i = 0; i < artifact; i++) 
 				  {
 					if(applist.apps[i]=="sales")
@@ -268,13 +270,13 @@ stages
 	   
     }
 }   
-	post 
+	/*post 
 	{
 		always 
 		{
 			emailext attachLog: true, body: "Result: ${currentBuild.result}", recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: "Pipeline: ${currentBuild.fullDisplayName}", to: "dhivya.krish15@gmail.com,cc: dhivyakrish1491@gmail.com,bcc: SatyaNarayan.Ghosh@cognizant.com"
 		}
-	}
+	}*/
 }
 
 
