@@ -216,7 +216,7 @@ stages
 	
 	    stage('Publish into S3')
     {
-        when {expression{(pipelinetype == "build_deploy")}} 
+        when {expression{(pipelinetype == "deploy")}} 
         steps 
         {
          script
