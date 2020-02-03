@@ -222,10 +222,10 @@ stages
         {
          script
          {
-		 if(envname=="dev"){		 
-		 def artifact = appdata.deployment_artifacts.size()
-		
-				  for (int i = 0; i < artifact; i++) 
+		def artifact = appdata.deployment_artifacts.size()
+		 if(envname=="dev")
+		 {		 
+		 		  for (int i = 0; i < artifact; i++) 
 				  {
 					if(appdata.deployment_artifacts[i]=="sales")
 					{
@@ -244,7 +244,7 @@ stages
 		 }
 		 else
 		 {
-			 def artifact = appdata.deployment_artifacts.size()
+			 
 			for (int i = 0; i < artifact; i++) 
 				  {
 					if(appdata.deployment_artifacts[i]=="sales")
