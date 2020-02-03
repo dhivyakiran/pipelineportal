@@ -9,7 +9,7 @@ nexus:
  nexusVersion: nexus3
  protocol: http
  repository: portal
- test: false
+test: false
 sonar: false
 s3bucket:
  dev:
