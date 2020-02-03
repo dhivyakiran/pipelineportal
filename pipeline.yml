@@ -10,7 +10,7 @@ nexus:
  protocol: http
  repository: portal
  test: false
-sonar: true
+sonar: false
 dev_s3bucket:
  sales: dev-salesportal-sales
  agent: dev-salesportal-agent

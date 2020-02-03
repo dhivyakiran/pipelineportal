@@ -224,7 +224,7 @@ stages
 				  def artifact = appdata.deployment_artifacts.size()
 				  for (int i = 0; i < artifact; i++) 
 				  {
-					sh "aws s3 cp dist/apps/${applist.apps[i]}/ s3://${mydatas.dev_s3bucket}.apps[i]/ --recursive"
+					sh "aws s3 cp dist/apps/sales/ s3://${mydatas.dev_s3bucket.sales}/ --recursive"
 					
 				  }
          } 
