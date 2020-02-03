@@ -216,56 +216,51 @@ stages
 	
 	    stage('Publish into S3')
     {
-        when {expression{(pipelinetype == "build_deploy")}} 
+        when {expression{(pipelinetype != "build")}} 
         steps 
         {
          script
          {
 				  def artifact = appdata.deployment_artifacts.size()
+		 if(envname=="dev"){
 				  for (int i = 0; i < artifact; i++) 
 				  {
 					if(applist.apps[i]=="sales")
 					{
-						sh "aws s3 cp portal/dist/apps/sales/ s3://${mydatas.s3bucket.dev.sales}/ --recursive"
+						sh "aws s3 cp portal/dist/apps/sales/ s3://${mydatas.s3bucket.envname.sales}/ --recursive"
 					}
 					if(applist.apps[i]=="agent")
 					{
-						sh "aws s3 cp portal/dist/apps/agent/ s3://${mydatas.s3bucket.dev.agent}/ --recursive"
+						sh "aws s3 cp portal/dist/apps/agent/ s3://${mydatas.s3bucket.envname.agent}/ --recursive"
 					}
 					if(applist.apps[i]=="member")
 					{
-						sh "aws s3 cp portal/dist/apps/member/ s3://${mydatas.s3bucket.dev.member}/ --recursive"
+						sh "aws s3 cp portal/dist/apps/member/ s3://${mydatas.s3bucket.envname.member}/ --recursive"
 					}
 					
 				  }
-         } 
-       }
-	   
-	    when {expression{(pipelinetype == "deploy")}} 
-        steps 
-        {
-         script
-         {
-				  def artifact = appdata.deployment_artifacts.size()
-				  for (int i = 0; i < artifact; i++) 
+		 }
+		 else
+		 {
+			for (int i = 0; i < artifact; i++) 
 				  {
 					if(applist.apps[i]=="sales")
 					{
-						sh "aws s3 cp portal/dist/apps/sales/ s3://${mydatas.s3bucket.dev.sales}/ --recursive"
+						sh "aws s3 cp portal/dist/apps/sales/ s3://${mydatas.s3bucket.envname.sales}/ --recursive"
 					}
 					if(applist.apps[i]=="agent")
 					{
-						sh "aws s3 cp portal/dist/apps/agent/ s3://${mydatas.s3bucket.dev.agent}/ --recursive"
+						sh "aws s3 cp portal/dist/apps/agent/ s3://${mydatas.s3bucket.envname.agent}/ --recursive"
 					}
 					if(applist.apps[i]=="member")
 					{
-						sh "aws s3 cp portal/dist/apps/member/ s3://${mydatas.s3bucket.dev.member}/ --recursive"
+						sh "aws s3 cp portal/dist/apps/member/ s3://${mydatas.s3bucket.envname.member}/ --recursive"
 					}
 					
-				  }
+				  } 
+		 }
          } 
        }
-	   
 	   
 	   
     }
