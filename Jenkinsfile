@@ -209,7 +209,7 @@ stages
 				  def artifact = appdata.deployment_artifacts.size()
 				  for (int i = 0; i < artifact; i++) 
 				  {
-					 unzip dir: "${appdata.deployment_artifacts[i]}/", glob: '', zipFile: "${appdata.deployment_artifacts[i]}/${appdata.deployment_artifacts[i]}-latest.zip"
+					 unzip dir: "${appdata.deployment_artifacts[i]}/", glob: '', zipFile: "${appdata.deployment_artifacts[i]}/${appdata.deployment_artifacts[i]}-${appdata.deploy_version}.zip"
 				  }
          } 
        }
