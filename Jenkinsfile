@@ -233,15 +233,15 @@ stages
 				  {
 					if(appdata.deployment_artifacts[i]=="sales")
 					{
-						sh "aws s3 cp portal/dist/apps/sales/ s3://sales-path/ --recursive"
+						sh "aws s3 cp portal/dist/apps/sales/ s3://salespath/ --recursive"
 					}
 					if(appdata.deployment_artifacts[i]=="agent")
 					{
-						sh "aws s3 cp portal/dist/apps/agent/ s3://agent-path/ --recursive"
+						sh "aws s3 cp portal/dist/apps/agent/ s3://agentpath/ --recursive"
 					}
 					if(appdata.deployment_artifacts[i]=="member")
 					{
-						sh "aws s3 cp portal/dist/apps/member/ s3://member-path/ --recursive"
+						sh "aws s3 cp portal/dist/apps/member/ s3://memberpath/ --recursive"
 					}
 					
 				  }
