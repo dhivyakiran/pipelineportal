@@ -11,7 +11,8 @@ nexus:
  repository: portal
  test: false
 sonar: false
-dev_s3bucket:
- sales: dev-salesportal-sales
- agent: dev-salesportal-agent
- members: dev-salesportal-members
+s3bucket:
+ dev:
+    sales: dev-salesportal-sales
+    agent: dev-salesportal-agent
+    member: dev-salesportal-members
