@@ -39,7 +39,7 @@ stages
     }
     stage("Checkout") 
     {
-        when {expression{(pipelinetype != "deploy")}}
+        //when {expression{(pipelinetype != "deploy")}}
         steps 
         {
 			dir('portal')
@@ -192,6 +192,7 @@ stages
 	        def artifact = appdata.deployment_artifacts.size()
 				  for (int i = 0; i < artifact; i++) 
 				  {
+					
 					sh "mkdir ${appdata.deployment_artifacts[i]}"      
 					sh "wget http://${mydatas.nexus.nexusUrl}/repository/${mydatas.nexus.repository}/${appdata.deploy_version}/${appdata.deployment_artifacts[i]}/${appdata.deploy_version}/${appdata.deployment_artifacts[i]}-${appdata.deploy_version}.zip -P ${appdata.deployment_artifacts[i]}/"
 				 }
