@@ -184,7 +184,7 @@ stages
     }
     stage('Download the artifact')
     {
-      when {expression{(pipelinetype == "deploy")}} 
+      when {expression{(pipelinetype != "build")}} 
 		  steps
       {
 			 script
@@ -200,7 +200,7 @@ stages
     }
     stage('Unzip the application')
     {
-        when {expression{(pipelinetype == "deploy")}} 
+        when {expression{(pipelinetype != "build")}} 
         steps 
         {
          script
