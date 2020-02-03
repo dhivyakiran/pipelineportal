@@ -240,6 +240,34 @@ stages
 				  }
          } 
        }
+	   
+	    when {expression{(pipelinetype == "deploy")}} 
+        steps 
+        {
+         script
+         {
+				  def artifact = appdata.deployment_artifacts.size()
+				  for (int i = 0; i < artifact; i++) 
+				  {
+					if(applist.apps[i]=="sales")
+					{
+						sh "aws s3 cp portal/dist/apps/sales/ s3://${mydatas.s3bucket.dev.sales}/ --recursive"
+					}
+					if(applist.apps[i]=="agent")
+					{
+						sh "aws s3 cp portal/dist/apps/agent/ s3://${mydatas.s3bucket.dev.agent}/ --recursive"
+					}
+					if(applist.apps[i]=="member")
+					{
+						sh "aws s3 cp portal/dist/apps/member/ s3://${mydatas.s3bucket.dev.member}/ --recursive"
+					}
+					
+				  }
+         } 
+       }
+	   
+	   
+	   
     }
 }   
 	post 
