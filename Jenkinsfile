@@ -225,9 +225,9 @@ stages
 		def artifact = appdata.deployment_artifacts.size()
 		//if(envname=="dev")
 		// {	
-		 sales-path = mydatas.s3bucket.${envname}.sales
-		 agent-path = mydatas.s3bucket.${envname}.agent
-		 member-path = mydatas.s3bucket.${envname}.member
+		 def sales-path = mydatas.s3bucket.${envname}.sales
+		 def agent-path = mydatas.s3bucket.${envname}.agent
+		 def member-path = mydatas.s3bucket.${envname}.member
 		 
 		 		  for (int i = 0; i < artifact; i++) 
 				  {
