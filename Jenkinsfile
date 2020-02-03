@@ -223,25 +223,29 @@ stages
          script
          {
 		def artifact = appdata.deployment_artifacts.size()
-		if(envname=="dev")
-		 {		 
+		//if(envname=="dev")
+		// {	
+		 sales-path = mydatas.s3bucket.${envname}.sales
+		 agent-path = mydatas.s3bucket.${envname}.agent
+		 member-path = mydatas.s3bucket.${envname}.member
+		 
 		 		  for (int i = 0; i < artifact; i++) 
 				  {
 					if(appdata.deployment_artifacts[i]=="sales")
 					{
-						sh "aws s3 cp portal/dist/apps/sales/ s3://${mydatas.s3bucket.dev.sales}/ --recursive"
+						sh "aws s3 cp portal/dist/apps/sales/ s3://sales-path/ --recursive"
 					}
 					if(appdata.deployment_artifacts[i]=="agent")
 					{
-						sh "aws s3 cp portal/dist/apps/agent/ s3://${mydatas.s3bucket.dev.agent}/ --recursive"
+						sh "aws s3 cp portal/dist/apps/agent/ s3://agent-path/ --recursive"
 					}
 					if(appdata.deployment_artifacts[i]=="member")
 					{
-						sh "aws s3 cp portal/dist/apps/member/ s3://${mydatas.s3bucket.dev.member}/ --recursive"
+						sh "aws s3 cp portal/dist/apps/member/ s3://member-path/ --recursive"
 					}
 					
 				  }
-		 }
+		// }
 		 /*else
 		 {
 			 
