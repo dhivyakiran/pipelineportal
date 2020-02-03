@@ -223,23 +223,43 @@ stages
          script
          {
 				  def artifact = appdata.deployment_artifacts.size()
-	
+		 if(envname=="dev"){
 				  for (int i = 0; i < artifact; i++) 
 				  {
 					if(applist.apps[i]=="sales")
 					{
-						sh "aws s3 cp portal/dist/apps/sales/ s3://${mydatas.s3bucket.envname.sales}/ --recursive"
+						sh "aws s3 cp portal/dist/apps/sales/ s3://${mydatas.s3bucket.dev.sales}/ --recursive"
 					}
 					if(applist.apps[i]=="agent")
 					{
-						sh "aws s3 cp portal/dist/apps/agent/ s3://${mydatas.s3bucket.envname.agent}/ --recursive"
+						sh "aws s3 cp portal/dist/apps/agent/ s3://${mydatas.s3bucket.dev.agent}/ --recursive"
 					}
 					if(applist.apps[i]=="member")
 					{
-						sh "aws s3 cp portal/dist/apps/member/ s3://${mydatas.s3bucket.envname.member}/ --recursive"
+						sh "aws s3 cp portal/dist/apps/member/ s3://${mydatas.s3bucket.dev.member}/ --recursive"
 					}
 					
 				  }
+		 }
+		 else
+		 {
+			for (int i = 0; i < artifact; i++) 
+				  {
+					if(applist.apps[i]=="sales")
+					{
+						sh "aws s3 cp portal/dist/apps/sales/ s3://${mydatas.s3bucket.int.sales}/ --recursive"
+					}
+					if(applist.apps[i]=="agent")
+					{
+						sh "aws s3 cp portal/dist/apps/agent/ s3://${mydatas.s3bucket.int.agent}/ --recursive"
+					}
+					if(applist.apps[i]=="member")
+					{
+						sh "aws s3 cp portal/dist/apps/member/ s3://${mydatas.s3bucket.int.member}/ --recursive"
+					}
+					
+				  } 
+		 }
 		
 	
          } 
