@@ -9,10 +9,9 @@ nexus:
  nexusVersion: nexus3
  protocol: http
  repository: portal
- version: '1.0'
-test: false
+ test: false
 sonar: true
 dev_s3bucket:
- salesurl:
- agenturl:
- membersurl: 
+ sales: dev-salesportal-sales
+ agent: dev-salesportal-agent
+ members: dev-salesportal-members
